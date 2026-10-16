@@ -1,0 +1,59 @@
+# Python Byte-code & Builds
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+
+# Local Databases & Vector Stores
+*.db
+*.sqlite
+*.sqlite3
+data/vector_store/*
+!data/vector_store/.gitkeep
+data/faiss_index/
+data/chroma/
+
+# Runtime Data & File Uploads
+data/uploads/*
+!data/uploads/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Node.js & Next.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
