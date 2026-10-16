@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Next.js
+node_modules
+frontend-next/node_modules
+frontend-next/.next
+frontend-next/out
+
+# Data & Uploads
+data/uploads/*
+data/faiss_index/*
+Testing_Financial_Document/
+*.pdf
+
+# IDE & OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.log
