@@ -1,0 +1,192 @@
+DEVELOPER 1 IMPLEMENTATION LOG (SAMAR)
+=====================================
+
+[2026-09-10] Module 1.1: PDF File Validator & Boundary Checker
+- Added PDFValidator with magic-byte check (%PDF-1.x) and size/encryption limits (50MB).
+- Target files: app/document_processing/validator.py, tests/document_processing/test_validator.py
+- Tests: 7/7 unit tests passed.
+- Commit: c3bf816
+
+[2026-09-10] Module 1.2: Digital Text Extractor
+- Added TextExtractor for page-by-page narrative extraction and scanned PDF detection (PROC_002).
+- Target files: app/document_processing/text_extractor.py, tests/document_processing/test_text_extractor.py
+- Tests: 3/3 unit tests passed (10/10 total suite).
+- Commit: 22f3685
+
+[2026-09-10] Module 1.3: Table Detection & Grid Extractor
+- Added TableExtractor with pdfplumber bounding-box detection and pipe-delimited markdown serializer.
+- Target files: app/document_processing/table_extractor.py, tests/document_processing/test_table_extractor.py
+- Tests: 5/5 unit tests passed (15/15 total suite).
+- Commit: af164d5
+
+[2026-09-10] Module 1.4: Financial Text Normalizer & Cleaner
+- Added TextCleaner for ligature/dash/space normalization, word dehyphenation, and running header/footer stripping.
+- Target files: app/document_processing/cleaner.py, tests/document_processing/test_cleaner.py
+- Tests: 6/6 unit tests passed (21/21 total suite).
+- Commit: 5d77445
+
+[2026-09-10] Module 2.1: Recursive Character Splitter
+- Added TextSplitter for hierarchical recursive chunking (\n\n -> \n -> .  -> ;  -> ' ') targeting 800-character window and minimum 100-character merging.
+- Target files: app/document_processing/chunker.py, tests/document_processing/test_chunker.py
+- Tests: 10/10 unit tests passed (31/31 total suite).
+- Commit: 1abceed
+
+[2026-09-10] Module 2.2: Contextual Overlap & Table Boundary Preserver
+- Added BoundaryManager for 150-character contextual backward overlap and Table Integrity Lock preventing mid-table / mid-cell row splits.
+- Target files: app/document_processing/chunk_boundary.py, tests/document_processing/test_chunk_boundary.py
+- Tests: 10/10 unit tests passed (41/41 total suite).
+- Commit: 21e2738
+
+[2026-09-10] Module 2.3: Chunk Metadata & Provenance Tagger
+- Added TextChunkDTO and MetadataTagger with UUIDv4 generation, document/page provenance, token estimation (4-char heuristic), and table chunk detection.
+- Target files: app/document_processing/metadata_tagger.py, tests/document_processing/test_metadata_tagger.py
+- Tests: 8/8 unit tests passed (49/49 total suite).
+- Commit: b91b295
+
+[2026-09-11] Module 3.1: Dense Vector Embedding Generator
+- Added EmbeddingGenerator with all-MiniLM-L6-v2 for 384-dimensional dense vectors, batch inference (32 chunks), and L2 unit normalization.
+- Target files: app/rag/embeddings.py, tests/rag/test_embeddings.py
+- Tests: 11/11 unit tests passed (60/60 total suite).
+- Commit: 3bb0441
+
+[2026-09-11] Module 3.2: In-Memory FAISS Vector Index
+- Added FAISSVectorStore with IndexFlatIP (384-dim), batch vector addition, and in-memory ID mapping dictionaries for chunk metadata lookup.
+- Target files: app/rag/faiss_store.py, tests/rag/test_faiss_store.py
+- Tests: 11/11 unit tests passed (71/71 total suite).
+- Commit: 60a49bb
+
+[2026-09-11] Module 3.3: Vector Similarity Retriever
+- Added VectorRetriever for Top-K candidate search, confidence threshold filtering (< 0.45 discarded), and sub-20ms latency.
+- Target files: app/rag/retriever.py, tests/rag/test_retriever.py
+- Tests: 9/9 unit tests passed (80/80 total suite).
+- Commit: f72e9f6
+
+[2026-09-11] Module 4.1: Context Builder & Delimiter Sandboxing
+- Added PromptBuilder with XML delimiter isolation (<context>...</context>) and provenance tag formatting ([Doc: id, Page: n]).
+- Target files: app/rag/prompt_builder.py, tests/rag/test_prompt_builder.py
+- Tests: 5/5 unit tests passed (85/85 total suite).
+- Commit: 877adaf
+
+[2026-09-11] Module 4.2: Negative-Constraint System Prompt Formulation
+- Added FinancialSystemPrompts with strict negative constraints, zero extrapolation rules, standardized fallback string, and OpenAI chat message assembly.
+- Target files: app/rag/system_prompts.py, tests/rag/test_system_prompts.py
+- Tests: 5/5 unit tests passed (90/90 total suite).
+- Commit: 877adaf
+
+[2026-09-11] Module 4.3: OpenAI GPT-4o-mini Client Wrapper
+- Added OpenAIClientWrapper for deterministic inference dispatch (temp=0.1, top_p=0.95, max_tokens=1024) and exponential backoff retry on HTTP 429/503.
+- Target files: app/rag/llm_client.py, tests/rag/test_llm_client.py
+- Tests: 5/5 unit tests passed (95/95 total suite).
+- Commit: 4c3e0fe
+
+[2026-09-11] Module 4.4: Local Air-Gapped Ollama Fallback Engine
+- Added OllamaClientWrapper for zero-network-egress inference (llama3) and HybridLLMDispatcher with automatic failover switch on connection/API drops.
+- Target files: app/rag/ollama_client.py, tests/rag/test_ollama_client.py
+- Tests: 6/6 unit tests passed (101/101 total suite).
+- Commit: 4c3e0fe
+
+[2026-09-11] Module 5.1: Inline Citation Regex Parser
+- Added CitationParser with bracketed regex extraction (r"\[Doc:\s*([^,]+),\s*Page:\s*(\d+)\]"), order-preserving first-occurrence deduplication, and RawCitationToken DTO.
+- Target files: app/rag/citation_parser.py, tests/rag/test_citation_parser.py
+- Tests: 10/10 unit tests passed (111/111 total suite).
+- Commit: 06de4f3
+
+[2026-09-11] Module 5.2: Provenance Verification & Snippet Mapper
+- Added CitationVerifier with retrieved chunk cross-referencing, phantom citation detection (is_verified=False), evidence sentence extraction, and VerifiedCitationDTO.
+- Target files: app/rag/citation_verifier.py, tests/rag/test_citation_verifier.py
+- Tests: 9/9 unit tests passed (120/120 total suite).
+- Commit: 1a11f18
+
+[2026-09-11] Module 6.1: Accounting Synonym & Terminology Matcher
+- Added SynonymMatcher with 50+ Indian & Global accounting aliases, canonical metric key resolution (12+ metrics), and statement domain classification (P&L, Balance Sheet, Cash Flow).
+- Target files: app/analytics/synonym_matcher.py, tests/analytics/test_synonym_matcher.py
+- Tests: 10/10 unit tests passed (130/130 total suite).
+- Commit: 0a8b71c
+
+[2026-09-11] Module 6.2: Financial Currency & Unit Normalizer
+- Added FinancialUnitNormalizer with Indian unit scaling (Cr/Lakh), Western scaling (M/B/K/T), accounting negative parentheses parsing, currency stripping, and Decimal quantization.
+- Target files: app/analytics/unit_normalizer.py, tests/analytics/test_unit_normalizer.py
+- Tests: 8/8 unit tests passed (138/138 total suite).
+- Commit: 5c96e70
+
+[2026-09-11] Module 6.3: Regex Tabular Line-Item Extractor
+- Added RegexMetricExtractor with markdown table parsing, multi-year column alignment (FY24/FY25), table-level scaling unit detection, and deterministic extraction into Decimals.
+- Target files: app/analytics/regex_extractor.py, tests/analytics/test_regex_extractor.py
+- Tests: 8/8 unit tests passed (146/146 total suite).
+- Commit: 773c199
+
+[2026-09-11] Module 6.4: Structured LLM JSON Fallback Extractor
+- Added LLMMetricExtractor with constrained JSON schema prompting, missing line-item fallback, audit metadata tracking (is_calculated, confidence, source), and ExtractedFinancialMetricsDTO.
+- Target files: app/analytics/llm_extractor.py, tests/analytics/test_llm_extractor.py
+- Tests: 8/8 unit tests passed (154/154 total suite).
+- Commit: 293b1fe
+
+[2026-09-11] Module 7.1: Profitability Ratios Calculator
+- Added ProfitabilityCalculator with OPM, NPM, ROE, ROCE formulas, zero-revenue/zero-equity/negative-capital-employed division guards, and ProfitabilityRatiosDTO.
+- Target files: app/analytics/ratios_profitability.py, tests/analytics/test_ratios_profitability.py
+- Tests: 15/15 unit tests passed (169/169 total suite).
+- Commit: 001beb3
+
+[2026-09-11] Module 7.2: Liquidity & Solvency Ratios Calculator
+- Added LiquidityCalculator with Current Ratio and Quick Ratio formulas, zero-liabilities guard, and inventory-absent fallback (Quick Ratio → Current Ratio).
+- Target files: app/analytics/ratios_liquidity.py, tests/analytics/test_ratios_liquidity.py
+- Tests: 11/11 unit tests passed (180/180 total suite).
+- Commit: 001beb3
+
+[2026-09-11] Module 7.3: Leverage & Coverage Ratios Calculator
+- Added LeverageCalculator with Debt-to-Equity and Interest Coverage Ratio formulas, negative-equity distress flag, zero-interest guard, and LeverageRatiosDTO.
+- Target files: app/analytics/ratios_leverage.py, tests/analytics/test_ratios_leverage.py
+- Tests: 13/13 unit tests passed (193/193 total suite).
+- Commit: 001beb3
+
+[2026-09-12] Module 8.1: Growth & Profitability Scoring Engine
+- Added DimensionScoreDTO and GrowthProfitScorer with piecewise linear mapping for YoY Revenue Growth (>10%) and PAT Growth (>15%), OPM (>15%) and NPM (>10%) scoring, margin contraction penalties, and explainable deductions.
+- Target files: app/analytics/health_growth_profit.py, tests/analytics/test_health_growth_profit.py
+- Tests: 19/19 unit tests passed (212/212 total suite).
+- Commit: ab0d122
+
+[2026-09-12] Module 8.2: Solvency & Cash Flow Scoring Engine
+- Added SolvencyCashScorer with Liquidity (Current Ratio optimal 1.5-2.5, negative working capital penalty), Leverage (D/E benchmark <1.0x, penalizing >2.0x, negative equity distress detection), and Cash Flow Quality (CFO/PAT >= 1.0, earnings divergence and operational burn penalties) scoring.
+- Target files: app/analytics/health_solvency_cash.py, tests/analytics/test_health_solvency_cash.py
+- Tests: 24/24 unit tests passed (236/236 total suite).
+- Commit: b41bbff
+
+[2026-09-12] Module 8.3: Composite Health Score & Rationale Aggregator
+- Added CorporateHealthReportDTO and HealthScoreAggregator with 5D weighted composite scoring (Growth 20%, Profitability 25%, Liquidity 20%, Leverage 20%, Cash Flow 15%), 5-tier rating classification (Strong, Stable, Moderate, Fragile, Distressed), executive rationale generator, and regulatory disclaimer.
+- Target files: app/analytics/health_scorer.py, tests/analytics/test_health_scorer.py
+- Tests: 13/13 unit tests passed (249/249 total suite).
+- Commit: de15526
+
+[2026-09-15] Module 9.1: Risk Factor Disclosure Parser
+- Added RiskDisclosureParser with Item 1A / Risk Disclosures section locator, sequential cursor tracking, exit header detection (Item 1B/2/7/8), Table of Contents (TOC) dot-leader filtering, and generic regulatory safe-harbor boilerplate noise elimination.
+- Target files: app/analytics/risk_parser.py, tests/analytics/test_risk_parser.py
+- Tests: 16/16 unit tests passed (264/264 total suite).
+- Commit: 95f9776
+
+[2026-09-15] Module 9.2: 7-Domain Risk Classifier & Severity Ranker
+- Added RiskItemDTO and RiskClassifier with constrained LLM JSON schema for 7 canonical domains (Credit, Market, Liquidity, Operational, Regulatory, Strategic, Macroeconomic), High/Medium/Low severity ranking, and direct verbatim supporting quote and page provenance extraction.
+- Target files: app/analytics/risk_classifier.py, tests/analytics/test_risk_classifier.py
+- Tests: 11/11 unit tests passed (275/275 total suite).
+- Commit: 015074e
+
+[2026-09-15] Module 10.1: PostgreSQL pgvector Storage & HNSW Index
+- Added PGVectorStore with bulk store_embeddings (document_chunks table, Vector(384) column), HNSW cosine search_similar (<=> operator, sub-50ms target), delete_document for re-ingestion cleanup, and get_chunk_count. Added DocumentChunk ORM model with HNSW vector_cosine_ops index (m=16, ef_construction=64). Added SQLAlchemy engine factory (database.py) with connection pooling and FastAPI dependency injection.
+- Target files: app/rag/pgvector_store.py, app/models/document_chunk.py, app/core/database.py, tests/rag/test_pgvector_store.py
+- Tests: 46/46 unit tests passed (321/321 total suite).
+- Commit: c9e8620
+
+[2026-10-14] Frontend Migration Phase 6: AI Analyst (RAG Chatbot) with Citations
+- Implemented ChatMessageItem, MarkdownRenderer with GFM tables & code styling, CitationDrawer slide-over inspector, SuggestedInquiries, and ChatInputBar with Markdown & Print/PDF export.
+- Integrated chat-store (Zustand with localStorage persistence) per document_id.
+- Target files: frontend-next/src/app/chat/page.tsx, frontend-next/src/components/chat/*, frontend-next/src/stores/chat-store.ts.
+
+[2026-10-14] Frontend Migration Phase 7: Multi-Company Comparison & Audit Logs
+- Implemented ComparisonSelector, ComparativeBarChart (Recharts side-by-side grouped bars), DeltaTable (with trend classification, search, and CSV export), and RiskProfileComparison (health score delta and risk factor drift).
+- Implemented TelemetryCards (FastAPI probe, DB status, pgvector HNSW index, confidence guard), AuditTelemetryTable (dynamic lifecycle traces, status filtering, CSV export, trace inspector modal), and ErrorCatalogTable (standardized error code directory).
+- Target files: frontend-next/src/app/compare/page.tsx, frontend-next/src/app/audit/page.tsx, frontend-next/src/components/compare/*, frontend-next/src/components/audit/*.
+
+[2026-10-14] Frontend Migration Phase 8: Dockerization, Testing, CORS & Production Polish
+- Added multi-stage standalone Dockerfile.next for Next.js 15+ frontend.
+- Updated docker-compose.yml and docker-compose.prod.yml with frontend-next service.
+- Enabled output: "standalone" in next.config.ts; verified zero TypeScript errors and successful production build with all routes prerendered.
+
