@@ -91,12 +91,12 @@ flowchart TD
         Q --> R[Citation-Grounded Answer + Source Page Trace]
     end
 
-    subgraph Presentation ["4. Streamlit Pitch Dark & Wine Red UI"]
+    subgraph Presentation ["4. Next.js 15 Enterprise Web Application"]
         H --> S[Executive Dashboard & 5D Radar]
         G --> T[Revenue Waterfall & Margin Bridges]
-        R --> U[AI Analyst Interactive Chat]
+        R --> U[AI Analyst Interactive Chat with Graph Trace]
         I --> V[Filing Comparison & Audit Trail]
-        S --> W[ReportLab Executive PDF Exporter]
+        S --> W[FalkorDB Knowledge Graph Explorer]
     end
 ```
 
@@ -193,47 +193,41 @@ Without FalkorDB, multi-hop relationship links cannot be inferred from vector em
 
 ---
 
-## Platform Interface & Workflow
+## Platform Interface & Next.js 15 Enterprise Workflow
 
-The platform provides a unified workspace built on a **Pitch Dark & Wine Red** luxury design system:
+The platform provides an enterprise user experience built on **Next.js 15 (App Router)** and **TailwindCSS**:
 
-### 1. Landing Page (`frontend/app.py`)
-- High-performance, edge-to-edge interactive Three.js Canvas **Laser Flow Hero**.
-- Live workspace statistics, architectural pipeline walkthrough, feature overview, and quick-launch access to the intelligence portal.
+### 1. Architectural Landing Page (`/`)
+- Editorial high-contrast design system with typography, interactive statement cards, and architectural pipeline overview.
 
-### 2. Executive Financial Dashboard (`frontend/pages/1_Dashboard.py`)
-- **Key Financial Indicators (KPIs)**: Revenue, EBITDA / EBIT, Net Income, Total Debt, Operating Cash Flow with automatic currency detection (USD `$`, INR `₹`).
-- **5-Dimension Corporate Health Assessment**: Interactive 0–100 gauge coupled with a 5D Radar Chart (Growth, Profitability, Liquidity, Leverage, Cash Flow).
-- **Financial Visualization Tabs**:
-  - *Waterfall Bridge*: Revenue to Net Income bridge breakdown.
-  - *Profitability Margins*: Gross, Operating, and Net margins.
-  - *Asset & Capital Allocation*: Balance sheet asset/liability composition.
-- **Risk Indicators & Audit Provenance**: Automated risk detection with severity classification (`[HIGH]`, `[MEDIUM]`, `[INFO]`).
-- **One-Click Executive PDF Briefing**: Instantly downloads a formatted briefing report.
+### 2. Executive Financial Dashboard (`/dashboard`)
+- **Key Financial Indicators (KPIs)**: Revenue, EBITDA / EBIT, Net Income, Total Debt, Operating Margin, Debt/Equity.
+- **5-Dimension Corporate Health Assessment**: Solvency rating and 5D Recharts Radar Chart (Growth, Profitability, Liquidity, Leverage, Cash Flow).
+- **Financial Visualizations**: Multi-year revenue trend, capital composition, and automated qualitative risk disclosures.
 
-### 3. Document Ingestion (`frontend/pages/2_Upload.py`)
+### 3. Document Ingestion & Corpus Selection (`/documents`)
 - Drag-and-drop uploader supporting **PDF**, **XLSX**, **XLS**, and **CSV**.
-- Real-time extraction progress bar, automatic metadata detection (Company, Fiscal Period, Fiscal Year, Currency).
-- Direct redirection to analytical dashboard upon completion.
+- Document management table with instant active corpus switching, metadata inspection, and deletion.
 
-### 4. Financial Statement Analysis (`frontend/pages/3_Analysis.py`)
-- Deep-dive ratio diagnostics:
-  - *Profitability*: Operating Margin, Net Profit Margin, Return on Equity (ROE), Return on Assets (ROA).
-  - *Liquidity & Solvency*: Current Ratio, Quick Ratio, Debt-to-Equity, Interest Coverage Ratio.
-  - *Cash Flow Health*: Cash Flow Coverage, Free Cash Flow conversion.
+### 4. Financial Statement Audit (`/analysis`)
+- Standardized statement tabs (Balance Sheet, Income Statement, Cash Flow Statement).
+- Interactive 8-ratio diagnostic grid with clickable source chunk verification drawers.
 
-### 5. AI Analyst Assistant (`frontend/pages/4_AI_Analyst.py`)
-- Full conversational financial assistant grounded exclusively in the active filing context.
-- **Pre-engineered Quick Prompt Chips**: One-click prompt suggestions arranged in a clean two-row grid.
-- **Response Telemetry**: Execution time in milliseconds, retrieved chunk count, and expandable citation cards with exact page and section references.
+### 5. Dual-Engine AI Analyst Chat (`/chat`)
+- Dual-mode toggle: **`🕸️ FALKORDB GRAPH`** vs. **`📄 VECTOR RAG`**.
+- Live execution traces: rendered Cypher queries, graph execution latency in milliseconds, and page-level citation proofs.
 
-### 6. Filing Comparison (`frontend/pages/5_Comparison.py`)
-- Side-by-side comparative analysis of two filings (e.g. FY2024 vs. FY2025 or Peer A vs. Peer B).
-- Variance calculation for health score, revenue, profitability, and debt.
-- **Newly Emerged Risks**: Automated set-difference engine highlighting new risk factors disclosed in the subsequent filing.
+### 6. Filing Comparison & Risk Drift (`/compare`)
+- Side-by-side comparative analysis of two filings (e.g., FY24 vs. FY25 or Peer A vs. Peer B).
+- Automated risk disclosure drift analyzer: newly emerged risks, resolved risks, and recurring liabilities.
 
-### 7. Audit & Provenance Logs (`frontend/pages/6_Audit_Logs.py`)
-- Full transparency into vector indexing, ingestion timestamps, chunk counts, extraction accuracy, and backend query logs.
+### 7. FalkorDB Knowledge Graph Explorer (`/graph`)
+- Interactive corporate graph topology viewer (Companies, Statements, Line Items, Ratios, Risk Factors).
+- Algorithmic PageRank systemic risk centrality analyzer.
+- Embedded interactive Cypher query console with real-time graph responses.
+
+### 8. Audit & Telemetry Traces (`/audit`)
+- Real-time pipeline lifecycle telemetry, chunk vectorization timestamps, and one-click CSV export.
 
 ---
 
@@ -255,9 +249,13 @@ $$\text{Health Score} = 0.20(\text{Growth}) + 0.25(\text{Profitability}) + 0.20(
 
 ## Technology Stack
 
+- **Frontend**: Next.js 15 (App Router), React 19, Turbopack, TailwindCSS, Recharts, Lucide Icons
 - **Backend**: FastAPI, Uvicorn, SQLAlchemy 2.0, Pydantic V2, Alembic
-- **Frontend**: Streamlit, Plotly, Altair, HTML5/CSS3 (Pitch Dark & Wine Red System), ReportLab
-- **Database & Vectors**: PostgreSQL 16 Alpine, `pgvector` native extension, FAISS
+- **Graph Database & Context Layer**: **FalkorDB** (Low-Latency Graph Database for AI Agents)
+- **Model Context Protocol (MCP)**: Native FalkorDB MCP Server (`app/mcp/falkor_mcp_server.py`)
+- **Vector Database**: PostgreSQL 16 Alpine with native `pgvector` extension (and FAISS offline fallback)
+- **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2`
+- **Orchestration**: Docker Compose with multi-stage standalone containers
 - **AI & RAG**: Google Gemini API (`google-genai` & `google-generativeai`), SentenceTransformers (`all-MiniLM-L6-v2`)
 - **Document Processing**: `pdfplumber`, `PyPDF2`, `pandas`, `openpyxl`
 - **Orchestration**: Docker, Docker Compose, Linux Alpine

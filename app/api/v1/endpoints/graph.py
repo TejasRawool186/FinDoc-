@@ -214,3 +214,20 @@ def calculate_risk_pagerank(company_name: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Risk centrality calculation failed: {str(exc)}",
         )
+
+
+@router.get("/memory/session/{session_id}")
+def recall_session_memories(session_id: str, limit: int = 5):
+    """Retrieve episodic memories recorded for a specific conversation session."""
+    from app.services.falkor_memory_manager import falkor_memory
+    memories = falkor_memory.recall_recent_memories(session_id=session_id, limit=limit)
+    return {"session_id": session_id, "memories": memories}
+
+
+@router.get("/memory/entity/{company_name}")
+def recall_entity_episodes(company_name: str, limit: int = 5):
+    """Recall all historical agent analyses and decisions made on a specific company across sessions."""
+    from app.services.falkor_memory_manager import falkor_memory
+    episodes = falkor_memory.recall_entity_episodes(company_name=company_name, limit=limit)
+    return {"company_name": company_name, "episodes": episodes}
+

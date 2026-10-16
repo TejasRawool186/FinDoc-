@@ -112,3 +112,48 @@ def test_graph_api_endpoints(test_client):
         assert "cypher_executed" in data_query
         assert "explainability" in data_query
         assert data_query["explainability"]["is_graph_grounded"] is True
+
+
+def test_falkordb_mcp_tools(test_client):
+    """Verify Model Context Protocol (MCP) tool discovery and execution endpoints."""
+    # 1. List tools
+    resp = test_client.get("/api/v1/mcp/tools")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "tools" in data
+    tool_names = [t["name"] for t in data["tools"]]
+    assert "falkor_query_graph" in tool_names
+    assert "falkor_get_risk_pagerank" in tool_names
+    assert "falkor_get_shortest_contagion_path" in tool_names
+    assert "falkor_reconcile_statements" in tool_names
+
+    # 2. Call tool with mock
+    from app.mcp.falkor_mcp_server import falkor_mcp
+    with patch.object(falkor_mcp, "execute_tool", return_value={"status": "success", "results": [{"val": 42}]}):
+        call_resp = test_client.post(
+            "/api/v1/mcp/call",
+            json={"tool_name": "falkor_query_graph", "arguments": {"cypher": "RETURN 42"}}
+        )
+        assert call_resp.status_code == 200
+        call_data = call_resp.json()
+        assert call_data["status"] == "success"
+        assert call_data["results"] == [{"val": 42}]
+
+
+def test_falkordb_memory_manager():
+    """Verify episodic memory recording and retrieval in FalkorDB."""
+    from app.services.falkor_memory_manager import FalkorAgentMemoryManager
+    mock_client = MagicMock()
+    mock_client.execute_query.return_value = [{"memory_id": "mem_12345"}]
+    
+    mgr = FalkorAgentMemoryManager(client=mock_client)
+    res = mgr.record_interaction(
+        session_id="test_session_1",
+        user_query="What was Tesla's Net Income?",
+        agent_answer="Tesla reported $14.99B Net Income in FY24.",
+        company_name="Tesla Inc",
+    )
+    assert res["status"] == "persisted"
+    assert res["memory_id"] == "mem_12345"
+    assert mock_client.execute_query.called
+

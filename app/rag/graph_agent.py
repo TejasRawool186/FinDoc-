@@ -15,12 +15,13 @@ from typing import Any, Dict, List, Optional
 from app.db.falkordb_client import falkor_client
 from app.rag.graph_queries import FalkorGraphAlgorithms, FinancialGraphQueries, graph_algorithms
 from app.rag.llm_client import PrimaryLLMClient
+from app.services.falkor_memory_manager import falkor_memory
 
 logger = logging.getLogger(__name__)
 
 
 class FalkorFinancialAgent:
-    """Intelligent reasoning agent powered by FalkorDB graph context."""
+    """Intelligent reasoning agent powered by FalkorDB graph context and persistent memory."""
 
     def __init__(
         self,
@@ -29,6 +30,7 @@ class FalkorFinancialAgent:
     ) -> None:
         self.client = client or falkor_client
         self.algorithms = FalkorGraphAlgorithms(client=self.client)
+        self.memory = falkor_memory
         self._llm = llm_client
 
     @property
@@ -46,6 +48,7 @@ class FalkorFinancialAgent:
         company_name: Optional[str] = None,
         year: Optional[int] = None,
         graph_name: Optional[str] = None,
+        session_id: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Process a natural language financial inquiry using FalkorDB graph reasoning.
         
@@ -118,7 +121,7 @@ class FalkorFinancialAgent:
         # 2. Synthesize Explainable Response
         synthesis = self._synthesize_response(query, company, tool_used, graph_data)
 
-        return {
+        result = {
             "answer": synthesis["summary"],
             "tool_used": tool_used,
             "company_analyzed": company,
@@ -130,8 +133,23 @@ class FalkorFinancialAgent:
                 "execution_time_ms": round(elapsed_ms, 2),
                 "nodes_evaluated": len(graph_data),
                 "is_graph_grounded": True,
+                "memory_persisted": bool(session_id),
             },
         }
+
+        if session_id:
+            try:
+                self.memory.record_interaction(
+                    session_id=session_id,
+                    user_query=query,
+                    agent_answer=synthesis["summary"],
+                    cypher_executed=cypher_query,
+                    company_name=company,
+                )
+            except Exception as mem_err:
+                logger.debug("Failed recording interaction to FalkorDB memory: %s", mem_err)
+
+        return result
 
     def _infer_company(self, query: str) -> Optional[str]:
         """Extract company name if mentioned in the query."""
