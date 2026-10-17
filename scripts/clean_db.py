@@ -25,15 +25,14 @@ def clean_database():
             "financial_metrics",
             "document_chunks",
             "documents",
-            "audit_logs",
         ]
         
         for table in tables:
             try:
                 db.execute(text(f"TRUNCATE TABLE {table} CASCADE;"))
+                db.commit()
                 print(f"  ✓ Cleaned table: {table}")
             except Exception as e:
-                # Table might not exist yet or non-Postgres
                 db.rollback()
                 print(f"  ! Note on table {table}: {e}")
 
