@@ -86,19 +86,23 @@ export default function DocumentsPage() {
     <AppLayout>
       <div className="space-y-8">
         {/* Header Banner */}
-        <div className="border border-black bg-white p-6 sm:p-8 shadow-[6px_6px_0px_#000000]">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 sm:p-8 shadow-[6px_6px_0px_#000000] dark:shadow-[6px_6px_0px_#FFFFFF]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="inline-block w-2.5 h-2.5 bg-[#FF0000]" />
-                <span className="text-xs font-mono font-bold tracking-widest text-black uppercase">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#FF0000] uppercase">
                   [ 01 / REPOSITORY ] INGESTION MODULE
                 </span>
+                <span className="h-4 w-px bg-black dark:bg-white" />
+                <span className="text-xs font-mono font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+                  LOCAL CORPUS
+                </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-black leading-none mb-2">
+              <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-black dark:text-white leading-none mb-2">
                 DOCUMENT <span className="stroke-text-thick">INGESTION</span>
               </h1>
-              <p className="text-xs font-mono text-zinc-600 uppercase">
+              <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                 VECTOR EXTRACTION &amp; CORPUS NORMALIZATION ACROSS PDF, CSV, AND SPREADSHEETS
               </p>
             </div>
@@ -107,7 +111,7 @@ export default function DocumentsPage() {
               variant="outline"
               size="sm"
               onClick={() => refetch()}
-              className="border border-black bg-white hover:bg-black hover:text-white rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] gap-2 px-4 self-start sm:self-auto"
+              className="border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] gap-2 px-4 self-start sm:self-auto cursor-pointer"
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>REFRESH</span>
@@ -128,13 +132,13 @@ export default function DocumentsPage() {
         )}
 
         {/* Upload Section */}
-        <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_#000000] space-y-6">
-          <div className="flex items-center justify-between border-b border-black pb-3">
-            <h2 className="text-sm font-black uppercase tracking-wider text-black flex items-center gap-2">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] space-y-6">
+          <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-3">
+            <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white flex items-center gap-2">
               <FolderUp className="h-4 w-4 text-[#FF0000]" />
               UPLOAD NEW CORPORATE FILING OR SPREADSHEET
             </h2>
-            <span className="text-[10px] font-mono text-zinc-600 uppercase">
+            <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               LOCAL FILE INGESTION
             </span>
           </div>
@@ -146,7 +150,7 @@ export default function DocumentsPage() {
           />
 
           {selectedFile && (
-            <div className="pt-4 border-t border-black">
+            <div className="pt-4 border-t-2 border-black dark:border-white">
               <MetadataForm
                 selectedFile={selectedFile}
                 onSubmit={handleMetadataSubmit}
@@ -156,7 +160,7 @@ export default function DocumentsPage() {
           )}
 
           {uploadError && (
-            <div className="flex items-center gap-2 border border-black bg-[#FF0000] text-white p-3 text-xs font-mono uppercase tracking-wider shadow-[3px_3px_0px_#000000]">
+            <div className="flex items-center gap-2 border-2 border-black dark:border-white bg-[#FF0000] text-white p-3 text-xs font-mono uppercase tracking-wider shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF]">
               <AlertCircle className="h-4 w-4 shrink-0 text-white" />
               <span>{uploadError}</span>
             </div>
@@ -164,17 +168,17 @@ export default function DocumentsPage() {
         </div>
 
         {/* Document Catalog */}
-        <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_#000000] space-y-4">
-          <div className="flex items-center justify-between border-b border-black pb-3">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-3">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-[#FF0000]">
+              <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                 [ 02 / CATALOG ]
               </span>
-              <h2 className="text-sm font-black uppercase tracking-wider text-black">
+              <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                 INDEXED FILINGS ({documents.length})
               </h2>
             </div>
-            <span className="text-[10px] font-mono text-zinc-600 uppercase">
+            <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               MANAGEMENT &amp; PROVENANCE
             </span>
           </div>

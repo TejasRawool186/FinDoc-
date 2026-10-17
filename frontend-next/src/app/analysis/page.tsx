@@ -107,33 +107,37 @@ export default function AnalysisPage() {
       <AppLayout>
         <div className="space-y-8">
           {/* ── Hero Banner ── */}
-          <div className="border border-black bg-white p-6 sm:p-8 shadow-[6px_6px_0px_#000000]">
+          <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 sm:p-8 shadow-[6px_6px_0px_#000000] dark:shadow-[6px_6px_0px_#FFFFFF]">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="inline-block w-2.5 h-2.5 bg-[#FF0000]" />
-                  <span className="text-xs font-mono font-bold tracking-widest text-black uppercase">
+                  <span className="text-xs font-mono font-bold tracking-widest text-[#FF0000] uppercase">
                     [ 02 / STATEMENTS ] FINANCIAL STATEMENT AUDIT
                   </span>
+                  <span className="h-4 w-px bg-black dark:bg-white" />
+                  <span className="text-xs font-mono font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+                    REPORTED DISCLOSURES
+                  </span>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-black leading-none mb-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-black dark:text-white leading-none mb-3">
                   {activeDocument.company_name ?? "COMPANY"} <span className="stroke-text-thick">STATEMENTS</span>
                 </h1>
-                <div className="text-xs font-mono text-black flex flex-wrap items-center gap-3">
-                  <span className="border border-black bg-zinc-100 px-2 py-0.5 font-bold">
+                <div className="text-xs font-mono text-black dark:text-white flex flex-wrap items-center gap-3">
+                  <span className="border border-black dark:border-neutral-700 bg-zinc-100 dark:bg-neutral-900 px-2 py-0.5 font-bold">
                     FILE: {activeDocument.filename}
                   </span>
                   {activeDocument.fiscal_year && (
-                    <span className="border border-black bg-white px-2 py-0.5 font-bold">
+                    <span className="border border-black dark:border-neutral-700 bg-white dark:bg-black px-2 py-0.5 font-bold">
                       FY {activeDocument.fiscal_year}
                     </span>
                   )}
                   {activeDocument.fiscal_period && (
-                    <span className="border border-black bg-white px-2 py-0.5 font-bold">
+                    <span className="border border-black dark:border-neutral-700 bg-white dark:bg-black px-2 py-0.5 font-bold">
                       PERIOD: {activeDocument.fiscal_period}
                     </span>
                   )}
-                  <span className="border border-black bg-black text-white px-2 py-0.5 font-bold uppercase">
+                  <span className="border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 font-bold uppercase">
                     CORPUS READY
                   </span>
                 </div>
@@ -145,17 +149,17 @@ export default function AnalysisPage() {
 
           {/* ── Section 1: Financial Statements (Tabs) ── */}
           <section>
-            <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+            <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black uppercase tracking-widest text-black">
+                <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                   [ 01 / STATEMENTS ]
                 </span>
-                <h2 className="text-sm font-black uppercase tracking-wider text-black">
+                <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                   STANDARDIZED GAAP / IFRS FINANCIAL STATEMENTS
                 </h2>
               </div>
               {!metricsLoading && (
-                <span className="text-[11px] font-mono text-zinc-600 uppercase">
+                <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                   {metrics.length} EXTRACTED LINE ITEMS (CLICK ROW TO INSPECT CHUNK)
                 </span>
               )}
@@ -172,16 +176,16 @@ export default function AnalysisPage() {
           {/* ── Section 2: Margin Visualization ── */}
           {!ratiosLoading && ratiosData && (
             <section>
-              <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+              <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-black uppercase tracking-widest text-[#FF0000]">
+                  <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                     [ 02 / MARGINS ]
                   </span>
-                  <h2 className="text-sm font-black uppercase tracking-wider text-black">
+                  <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                     MARGIN EXPANSION &amp; RETURN PROFILES
                   </h2>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-600 uppercase">
+                <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                   PROFITABILITY METRICS
                 </span>
               </div>
@@ -196,12 +200,12 @@ export default function AnalysisPage() {
                 ].map(({ label, value, suffix }) => (
                   <div
                     key={label}
-                    className="border border-black bg-white p-4 flex flex-col gap-1 shadow-[3px_3px_0px_#000000] hover:shadow-[5px_5px_0px_#000000] transition-shadow"
+                    className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 flex flex-col gap-1 shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] hover:shadow-[5px_5px_0px_#000000] dark:hover:shadow-[5px_5px_0px_#FFFFFF] transition-shadow"
                   >
-                    <span className="text-[10px] uppercase font-mono font-bold text-zinc-600">
+                    <span className="text-[10px] uppercase font-mono font-bold text-neutral-600 dark:text-neutral-400">
                       {label}
                     </span>
-                    <span className="text-2xl font-black text-black">
+                    <span className="text-2xl font-black text-black dark:text-white">
                       {value != null ? `${value.toFixed(2)}${suffix}` : "—"}
                     </span>
                   </div>
@@ -212,16 +216,16 @@ export default function AnalysisPage() {
 
           {/* ── Section 3: Ratio Analysis Grid ── */}
           <section>
-            <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+            <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black uppercase tracking-widest text-black">
+                <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                   [ 03 / DIAGNOSTICS ]
                 </span>
-                <h2 className="text-sm font-black uppercase tracking-wider text-black">
+                <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                   FINANCIAL RATIOS &amp; BENCHMARK STATUS
                 </h2>
               </div>
-              <span className="text-[11px] font-mono text-zinc-600 uppercase">
+              <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                 FORMULA EVALUATION
               </span>
             </div>
@@ -230,16 +234,16 @@ export default function AnalysisPage() {
 
           {/* ── Section 4: All Extracted Metrics Table ── */}
           <section>
-            <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+            <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black uppercase tracking-widest text-[#FF0000]">
+                <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                   [ 04 / PROVENANCE ]
                 </span>
-                <h2 className="text-sm font-black uppercase tracking-wider text-black">
+                <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                   ALL EXTRACTED FINANCIAL LINE ITEMS
                 </h2>
               </div>
-              <span className="text-[11px] font-mono text-zinc-600 uppercase">
+              <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                 SEARCHABLE INVENTORY
               </span>
             </div>

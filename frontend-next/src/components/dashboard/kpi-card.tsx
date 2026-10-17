@@ -34,37 +34,37 @@ export function KpiCard({
   return (
     <div
       className={cn(
-        "group relative border border-black bg-white p-3.5 sm:p-4 rounded-none",
-        "transition-all duration-150 hover:shadow-[4px_4px_0px_#000000] hover:-translate-x-0.5 hover:-translate-y-0.5"
+        "group relative border-2 border-black dark:border-white bg-white dark:bg-black p-3.5 sm:p-4 rounded-none",
+        "transition-all duration-150 hover:shadow-[4px_4px_0px_#000000] dark:hover:shadow-[4px_4px_0px_#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5"
       )}
     >
-      <div className="flex items-center justify-between gap-1.5 pb-2 border-b-2 border-black">
-        <span className="text-xs sm:text-[12.5px] font-sans font-black uppercase tracking-wider text-black [-webkit-text-stroke:0.35px_#000000]" title={title}>
+      <div className="flex items-center justify-between gap-1.5 pb-2 border-b-2 border-black dark:border-white">
+        <span className="text-xs sm:text-[12.5px] font-sans font-black uppercase tracking-wider text-black dark:text-white" title={title}>
           [ {title} ]
         </span>
-        <div className="flex h-5 w-5 shrink-0 items-center justify-center border-2 border-black bg-white text-black group-hover:bg-black group-hover:text-white transition-colors">
+        <div className="flex h-5 w-5 shrink-0 items-center justify-center border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors">
           <Icon size={12} strokeWidth={2.5} className="shrink-0" />
         </div>
       </div>
 
       {isLoading ? (
         <div className="space-y-2 mt-4">
-          <div className="h-10 w-32 bg-neutral-200 animate-pulse" />
-          <div className="h-4 w-20 bg-neutral-200 animate-pulse" />
+          <div className="h-10 w-32 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+          <div className="h-4 w-20 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
         </div>
       ) : (
         <div className="mt-3">
-          <div className="text-3xl sm:text-4xl lg:text-[40px] font-black tracking-tighter text-black leading-none">
+          <div className="text-3xl sm:text-4xl lg:text-[40px] font-black tracking-tighter text-black dark:text-white leading-none">
             {value ?? "N/A"}
             {unit && (
-              <span className="ml-1.5 text-xs font-mono font-black uppercase text-neutral-700">
+              <span className="ml-1.5 text-xs font-mono font-black uppercase text-neutral-700 dark:text-neutral-300">
                 {unit}
               </span>
             )}
           </div>
 
           {description && !hasChange && (
-            <p className="mt-2 text-xs font-mono font-bold text-neutral-700">{description}</p>
+            <p className="mt-2 text-xs font-mono font-bold text-neutral-700 dark:text-neutral-300">{description}</p>
           )}
 
           {hasChange && (
@@ -73,9 +73,9 @@ export function KpiCard({
                 className={cn(
                   "inline-flex items-center gap-1 font-mono text-[10px] font-bold px-1.5 py-0.5 border",
                   isPositive
-                    ? "border-black bg-black text-white"
+                    ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black"
                     : isNeutral
-                    ? "border-neutral-300 text-neutral-600"
+                    ? "border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400"
                     : "border-[#FF0000] bg-[#FF0000] text-white"
                 )}
               >

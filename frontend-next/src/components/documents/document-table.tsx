@@ -78,12 +78,12 @@ export function DocumentTable({
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         {/* Search */}
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-500" />
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="FILTER BY COMPANY OR FILENAME..."
-            className="pl-9 h-9 text-xs font-mono rounded-none border border-black bg-white text-black placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:border-black shadow-[2px_2px_0px_#000000]"
+            className="pl-9 h-9 text-xs font-mono rounded-none border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus-visible:ring-0 focus-visible:border-black dark:focus-visible:border-white shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]"
           />
         </div>
 
@@ -94,10 +94,10 @@ export function DocumentTable({
               key={status}
               onClick={() => setStatusFilter(status)}
               className={cn(
-                "px-3 py-1.5 text-[10px] font-mono font-black uppercase tracking-wider border border-black transition-all",
+                "px-3 py-1.5 text-[10px] font-mono font-black uppercase tracking-wider border-2 border-black dark:border-white transition-all cursor-pointer",
                 statusFilter === status
-                  ? "bg-black text-white shadow-[2px_2px_0px_#FF0000]"
-                  : "bg-white text-black hover:bg-zinc-100"
+                  ? "bg-black dark:bg-white text-white dark:text-black shadow-[2px_2px_0px_#FF0000]"
+                  : "bg-white dark:bg-black text-black dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900"
               )}
             >
               {status}
@@ -108,24 +108,24 @@ export function DocumentTable({
 
       {/* Table Container */}
       <Table>
-          <TableHeader className="bg-black text-white border-b-2 border-black">
-            <TableRow className="bg-black text-white hover:bg-black border-b-2 border-black">
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider">
+          <TableHeader className="bg-black dark:bg-white text-white dark:text-black border-b-2 border-black dark:border-white">
+            <TableRow className="bg-black dark:bg-white text-white dark:text-black hover:bg-black dark:hover:bg-white border-b-2 border-black dark:border-white">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider">
                 DOCUMENT / FILING
               </TableHead>
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider">
                 ENTITY
               </TableHead>
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider">
                 PERIOD
               </TableHead>
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider">
                 SIZE
               </TableHead>
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider">
                 STATUS
               </TableHead>
-              <TableHead className="bg-black text-white text-[11px] font-mono font-black uppercase tracking-wider text-right">
+              <TableHead className="bg-black dark:bg-white text-white dark:text-black text-[11px] font-mono font-black uppercase tracking-wider text-right">
                 ACTIONS
               </TableHead>
             </TableRow>
@@ -133,15 +133,15 @@ export function DocumentTable({
           <TableBody>
             {isLoading ? (
               [1, 2, 3, 4].map((i) => (
-                <TableRow key={i} className="border-b border-zinc-200">
+                <TableRow key={i} className="border-b border-zinc-200 dark:border-neutral-800">
                   <TableCell colSpan={6} className="py-4">
-                    <div className="h-5 bg-zinc-200 animate-pulse" />
+                    <div className="h-5 bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
                   </TableCell>
                 </TableRow>
               ))
             ) : filteredDocuments.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="py-12 text-center text-xs font-mono uppercase text-zinc-500">
+                <TableCell colSpan={6} className="py-12 text-center text-xs font-mono uppercase text-neutral-500 dark:text-neutral-400">
                   NO DOCUMENTS MATCHING ACTIVE FILTER CRITERIA
                 </TableCell>
               </TableRow>
@@ -152,19 +152,21 @@ export function DocumentTable({
                   <TableRow
                     key={doc.id}
                     className={cn(
-                      "border-b border-black transition-colors",
-                      isActive ? "bg-zinc-100 border-l-4 border-l-[#FF0000]" : "hover:bg-zinc-50"
+                      "border-b border-black dark:border-neutral-700 transition-colors",
+                      isActive
+                        ? "bg-zinc-100 dark:bg-neutral-900 border-l-4 border-l-[#FF0000]"
+                        : "hover:bg-zinc-50 dark:hover:bg-neutral-950"
                     )}
                   >
                     {/* Filename & Tag */}
                     <TableCell className="py-3 font-mono text-xs">
                       <div className="flex items-center gap-2.5">
-                        <FileText className={cn("h-4 w-4 shrink-0", isActive ? "text-[#FF0000]" : "text-black")} />
+                        <FileText className={cn("h-4 w-4 shrink-0", isActive ? "text-[#FF0000]" : "text-black dark:text-white")} />
                         <div className="min-w-0">
-                          <p className="font-bold text-black truncate max-w-[220px]">
+                          <p className="font-bold text-black dark:text-white truncate max-w-[220px]">
                             {doc.filename}
                           </p>
-                          <span className="text-[10px] text-zinc-500">
+                          <span className="text-[10px] text-neutral-500 dark:text-neutral-400">
                             ID: {doc.id.slice(0, 8)}...
                           </span>
                         </div>
@@ -172,35 +174,35 @@ export function DocumentTable({
                     </TableCell>
 
                     {/* Company */}
-                    <TableCell className="font-mono text-xs font-bold text-black uppercase">
+                    <TableCell className="font-mono text-xs font-bold text-black dark:text-white uppercase">
                       {doc.company_name || "—"}
                     </TableCell>
 
                     {/* Period */}
-                    <TableCell className="font-mono text-xs text-zinc-800">
+                    <TableCell className="font-mono text-xs text-neutral-800 dark:text-neutral-200">
                       {doc.fiscal_year ? `FY${doc.fiscal_year}` : "—"}
                       {doc.fiscal_period ? ` (${doc.fiscal_period})` : ""}
                     </TableCell>
 
                     {/* Size */}
-                    <TableCell className="font-mono text-xs text-zinc-600">
+                    <TableCell className="font-mono text-xs text-neutral-600 dark:text-neutral-400">
                       {doc.file_size_bytes ? formatBytes(doc.file_size_bytes) : "—"}
                     </TableCell>
 
                     {/* Status Badge */}
                     <TableCell>
                       {doc.status === "COMPLETED" ? (
-                        <span className="inline-flex items-center gap-1 border border-black bg-black text-white px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
-                          <Check className="h-3 w-3 text-white" />
+                        <span className="inline-flex items-center gap-1 border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
+                          <Check className="h-3 w-3 text-white dark:text-black" />
                           COMPLETED
                         </span>
                       ) : doc.status === "PROCESSING" ? (
-                        <span className="inline-flex items-center gap-1 border border-black bg-zinc-200 text-black px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
-                          <Loader2 className="h-3 w-3 animate-spin text-black" />
+                        <span className="inline-flex items-center gap-1 border border-black dark:border-neutral-700 bg-zinc-200 dark:bg-neutral-800 text-black dark:text-white px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
+                          <Loader2 className="h-3 w-3 animate-spin text-black dark:text-white" />
                           PARSING
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 border border-black bg-[#FF0000] text-white px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
+                        <span className="inline-flex items-center gap-1 border border-black dark:border-white bg-[#FF0000] text-white px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
                           <AlertCircle className="h-3 w-3 text-white" />
                           {doc.status}
                         </span>
@@ -215,10 +217,10 @@ export function DocumentTable({
                           type="button"
                           onClick={() => setActiveDocument(doc)}
                           className={cn(
-                            "h-7 px-2.5 inline-flex items-center justify-center border border-black text-[10px] font-mono font-black uppercase tracking-wider transition-colors cursor-pointer",
+                            "h-7 px-2.5 inline-flex items-center justify-center border border-black dark:border-white text-[10px] font-mono font-black uppercase tracking-wider transition-colors cursor-pointer",
                             isActive
-                              ? "bg-black text-white hover:bg-black/90 shadow-[1px_1px_0px_#FF0000]"
-                              : "bg-white text-black hover:bg-black hover:text-white"
+                              ? "bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 shadow-[1px_1px_0px_#FF0000]"
+                              : "bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
                           )}
                         >
                           {isActive ? "ACTIVE" : "SET ACTIVE"}
@@ -228,7 +230,7 @@ export function DocumentTable({
                         <button
                           type="button"
                           onClick={() => setInspectDoc(doc)}
-                          className="h-7 w-7 p-0 inline-flex items-center justify-center border border-black bg-white hover:bg-black text-black hover:text-white transition-colors cursor-pointer"
+                          className="h-7 w-7 p-0 inline-flex items-center justify-center border border-black dark:border-white bg-white dark:bg-black hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black text-black dark:text-white transition-colors cursor-pointer"
                           title="Inspect Metadata"
                         >
                           <Eye size={14} strokeWidth={2} className="shrink-0" />
@@ -238,7 +240,7 @@ export function DocumentTable({
                         <Link
                           href="/analysis"
                           onClick={() => setActiveDocument(doc)}
-                          className="h-7 w-7 p-0 inline-flex items-center justify-center border border-black bg-white hover:bg-black text-black hover:text-white transition-colors cursor-pointer"
+                          className="h-7 w-7 p-0 inline-flex items-center justify-center border border-black dark:border-white bg-white dark:bg-black hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black text-black dark:text-white transition-colors cursor-pointer"
                           title="Open Analysis"
                         >
                           <LineChart size={14} strokeWidth={2} className="shrink-0" />

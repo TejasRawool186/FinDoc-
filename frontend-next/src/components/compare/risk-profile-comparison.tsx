@@ -53,15 +53,15 @@ export function RiskProfileComparison({
   const ratingB = getScoreRating(scoreB, healthB?.rating);
 
   return (
-    <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_#000000] space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black pb-3">
+    <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-black dark:border-white pb-3">
         <div className="flex items-center gap-2">
           <ShieldCheck className="h-4 w-4 text-[#FF0000]" />
-          <h4 className="text-xs font-black uppercase tracking-wider text-black">
+          <h4 className="text-xs font-black uppercase tracking-wider text-black dark:text-white">
             <span className="text-[#FF0000]">[ 03 / RISK ]</span> HEALTH TRAJECTORY &amp; RISK DRIFT
           </h4>
         </div>
-        <span className="text-[10px] font-mono text-zinc-500 uppercase">
+        <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">
           COMPOSITE 5D HEALTH SCORING &amp; DISCLOSURE DRIFT
         </span>
       </div>
@@ -69,30 +69,30 @@ export function RiskProfileComparison({
       {/* Health Score Comparison Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Baseline Card */}
-        <div className="border border-black bg-white p-4 space-y-1 shadow-[2px_2px_0px_#000000]">
-          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-zinc-600">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 space-y-1 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
+          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-neutral-600 dark:text-neutral-400">
             BASELINE ({docAName})
           </span>
-          <div className="text-3xl font-black text-black">
+          <div className="text-3xl font-black text-black dark:text-white">
             {scoreA !== null ? `${scoreA.toFixed(1)}/100` : "N/A"}
           </div>
-          <p className="text-xs font-mono text-zinc-600 uppercase">
-            RATING: <span className="text-black font-bold">{ratingA}</span>
+          <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
+            RATING: <span className="text-black dark:text-white font-bold">{ratingA}</span>
           </p>
         </div>
 
         {/* Target Card */}
-        <div className="border border-black bg-white p-4 space-y-1 shadow-[2px_2px_0px_#000000]">
-          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-zinc-600">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 space-y-1 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
+          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-neutral-600 dark:text-neutral-400">
             TARGET ({docBName})
           </span>
-          <div className="text-3xl font-black text-black flex items-center justify-between">
+          <div className="text-3xl font-black text-black dark:text-white flex items-center justify-between">
             <span>{scoreB !== null ? `${scoreB.toFixed(1)}/100` : "N/A"}</span>
             {deltaScore !== null && (
               <span
-                className={`text-xs font-mono font-bold px-2 py-0.5 border border-black ${
+                className={`text-xs font-mono font-bold px-2 py-0.5 border border-black dark:border-white ${
                   deltaScore >= 0
-                    ? "bg-black text-white"
+                    ? "bg-black dark:bg-white text-white dark:text-black"
                     : "bg-[#FF0000] text-white"
                 }`}
               >
@@ -101,20 +101,20 @@ export function RiskProfileComparison({
               </span>
             )}
           </div>
-          <p className="text-xs font-mono text-zinc-600 uppercase">
+          <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
             RATING: <span className="text-[#FF0000] font-bold">{ratingB}</span>
           </p>
         </div>
 
         {/* Risk Drift Summary Card */}
-        <div className="border border-black bg-white p-4 space-y-1 shadow-[2px_2px_0px_#000000]">
-          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-zinc-600">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 space-y-1 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
+          <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-neutral-600 dark:text-neutral-400">
             DISCLOSURE DRIFT DELTA
           </span>
-          <div className="text-3xl font-black text-black">
+          <div className="text-3xl font-black text-black dark:text-white">
             {newlyEmergedRisks.length} NEW
           </div>
-          <p className="text-xs font-mono text-zinc-600 uppercase">
+          <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
             {resolvedRisks.length} RESOLVED • {persistentRisks.length} RECURRING
           </p>
         </div>
@@ -133,7 +133,7 @@ export function RiskProfileComparison({
               {newlyEmergedRisks.map((risk, idx) => (
                 <div
                   key={`new-risk-${idx}`}
-                  className="border border-black bg-white p-3 text-xs font-mono uppercase text-black leading-relaxed shadow-[2px_2px_0px_#FF0000]"
+                  className="border-2 border-black dark:border-white bg-white dark:bg-neutral-900 p-3 text-xs font-mono uppercase text-black dark:text-white leading-relaxed shadow-[2px_2px_0px_#FF0000]"
                 >
                   {risk}
                 </div>
@@ -145,7 +145,7 @@ export function RiskProfileComparison({
         {/* Mitigated Risks */}
         {resolvedRisks.length > 0 && (
           <div className="space-y-2 pt-2">
-            <span className="text-xs font-black uppercase text-black flex items-center gap-1.5">
+            <span className="text-xs font-black uppercase text-black dark:text-white flex items-center gap-1.5">
               <CheckCircle2 className="h-3.5 w-3.5" />
               RESOLVED / MITIGATED RISK FACTORS ({resolvedRisks.length})
             </span>
@@ -153,7 +153,7 @@ export function RiskProfileComparison({
               {resolvedRisks.map((risk, idx) => (
                 <div
                   key={`res-risk-${idx}`}
-                  className="border border-black bg-zinc-50 p-3 text-xs font-mono uppercase text-zinc-800 leading-relaxed"
+                  className="border border-black dark:border-white bg-zinc-100 dark:bg-neutral-900 p-3 text-xs font-mono uppercase text-neutral-800 dark:text-neutral-200 leading-relaxed"
                 >
                   {risk}
                 </div>
@@ -165,7 +165,7 @@ export function RiskProfileComparison({
         {/* Persistent Risks */}
         {persistentRisks.length > 0 && (
           <div className="space-y-2 pt-2">
-            <span className="text-xs font-black uppercase text-zinc-600 flex items-center gap-1.5">
+            <span className="text-xs font-black uppercase text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
               <AlertCircle className="h-3.5 w-3.5" />
               PERSISTENT DISCLOSURES ACROSS BOTH FILINGS ({persistentRisks.length})
             </span>
@@ -173,7 +173,7 @@ export function RiskProfileComparison({
               {persistentRisks.map((risk, idx) => (
                 <div
                   key={`pers-risk-${idx}`}
-                  className="border border-zinc-300 bg-white p-3 text-xs font-mono uppercase text-zinc-600 leading-relaxed"
+                  className="border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black p-3 text-xs font-mono uppercase text-neutral-600 dark:text-neutral-400 leading-relaxed"
                 >
                   {risk}
                 </div>
@@ -183,7 +183,7 @@ export function RiskProfileComparison({
         )}
 
         {newlyEmergedRisks.length === 0 && resolvedRisks.length === 0 && persistentRisks.length === 0 && (
-          <p className="text-xs font-mono uppercase text-zinc-500">
+          <p className="text-xs font-mono uppercase text-neutral-500 dark:text-neutral-400">
             NO SPECIFIC RISK FLAGS CATALOGED FOR THESE ENTITY FILINGS.
           </p>
         )}

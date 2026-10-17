@@ -81,7 +81,8 @@ export function HealthGauge({
           <path
             d={describeArc(startAngle, endAngle, radius)}
             fill="none"
-            stroke="#E5E5E5"
+            stroke="currentColor"
+            className="text-neutral-200 dark:text-neutral-800"
             strokeWidth={strokeWidth}
             strokeLinecap="square"
           />
@@ -91,7 +92,8 @@ export function HealthGauge({
             <path
               d={describeArc(startAngle, startAngle + filledArc, radius)}
               fill="none"
-              stroke={stroke}
+              stroke={clampedScore < 70 ? "#FF0000" : "currentColor"}
+              className={clampedScore >= 70 ? "text-black dark:text-white" : ""}
               strokeWidth={strokeWidth}
               strokeLinecap="square"
               style={{ transition: "all 0.8s ease-out" }}
@@ -110,7 +112,8 @@ export function HealthGauge({
                 y1={inner.y}
                 x2={outer.x}
                 y2={outer.y}
-                stroke="#000000"
+                stroke="currentColor"
+                className="text-black dark:text-white"
                 strokeWidth={1.5}
               />
             );
@@ -127,7 +130,9 @@ export function HealthGauge({
                     cx={np.x}
                     cy={np.y}
                     r={strokeWidth * 0.45}
-                    fill="white"
+                    fill={clampedScore < 70 ? "#FF0000" : "#FFFFFF"}
+                    stroke="#000000"
+                    strokeWidth={1}
                     filter="url(#gauge-glow)"
                     style={{ transition: "all 0.8s ease-out" }}
                   />
@@ -142,11 +147,10 @@ export function HealthGauge({
             y={cy + size * 0.06}
             textAnchor="middle"
             dominantBaseline="middle"
-            className={cn("font-bold fill-current", text)}
+            className={cn("font-black fill-current", clampedScore < 70 ? "text-[#FF0000]" : "text-black dark:text-white")}
             style={{
               fontSize: size * 0.2,
-              fontWeight: 800,
-              fill: isLoading ? "rgba(148,163,184,0.2)" : stroke,
+              fontWeight: 900,
             }}
           >
             {isLoading ? "—" : Math.round(clampedScore)}
@@ -155,10 +159,10 @@ export function HealthGauge({
             x={cx}
             y={cy + size * 0.22}
             textAnchor="middle"
+            className="fill-current text-neutral-500 dark:text-neutral-400 font-mono"
             style={{
               fontSize: size * 0.072,
-              fill: "rgba(148,163,184,0.7)",
-              fontWeight: 500,
+              fontWeight: 600,
             }}
           >
             / 100
@@ -170,12 +174,10 @@ export function HealthGauge({
               x={cx}
               y={cy + size * 0.345}
               textAnchor="middle"
+              className={cn("font-mono font-bold uppercase fill-current", clampedScore < 70 ? "text-[#FF0000]" : "text-black dark:text-white")}
               style={{
                 fontSize: size * 0.067,
-                fill: stroke,
-                fontWeight: 700,
                 letterSpacing: "0.05em",
-                textTransform: "uppercase",
               }}
             >
               {statusLabel}
@@ -184,7 +186,7 @@ export function HealthGauge({
         </svg>
       </div>
 
-      <p className="text-xs font-medium text-slate-400 tracking-wide uppercase">{label}</p>
+      <p className="text-xs font-mono font-bold text-neutral-600 dark:text-neutral-400 tracking-wide uppercase">{label}</p>
     </div>
   );
 }
