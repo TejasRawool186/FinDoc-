@@ -128,26 +128,26 @@ export default function DashboardPage() {
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center min-h-[65vh] p-8">
-          <div className="max-w-xl w-full border-2 border-black bg-white p-10 shadow-[8px_8px_0px_#000000] text-center">
-            <div className="inline-block border border-black bg-black text-white px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase mb-6">
+          <div className="max-w-xl w-full border-2 border-black dark:border-white bg-white dark:bg-black p-10 shadow-[8px_8px_0px_#000000] dark:shadow-[8px_8px_0px_#FFFFFF] text-center">
+            <div className="inline-block border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase mb-6">
               [ STATUS: NO ACTIVE CORPUS ]
             </div>
-            <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter text-black mb-4 leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter text-black dark:text-white mb-4 leading-none">
               WORKSPACE <br />
               <span className="stroke-text-thick">UNINITIALIZED</span>
             </h2>
-            <p className="text-sm font-mono text-zinc-600 mb-8 max-w-md mx-auto leading-relaxed">
+            <p className="text-sm font-mono text-neutral-600 dark:text-neutral-400 mb-8 max-w-md mx-auto leading-relaxed">
               Select an ingested filing from the top workspace selector or upload a 10-K, 10-Q, or Annual Report to generate financial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/documents" className="w-full sm:w-auto">
-                <Button className="w-full bg-black text-white hover:bg-black/90 font-black uppercase tracking-wider rounded-none border border-black shadow-[3px_3px_0px_#000000] gap-2 px-6">
+                <Button className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-[#FF0000] hover:text-white dark:hover:bg-[#FF0000] dark:hover:text-white font-black uppercase tracking-wider rounded-none border border-black dark:border-white shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] gap-2 px-6">
                   <FolderUp className="h-4 w-4 text-[#FF0000]" />
                   Upload Filing
                 </Button>
               </Link>
               <Link href="/chat" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full bg-white text-black hover:bg-black hover:text-white font-black uppercase tracking-wider rounded-none border border-black shadow-[3px_3px_0px_#000000] gap-2 px-6">
+                <Button variant="outline" className="w-full bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-black uppercase tracking-wider rounded-none border border-black dark:border-white shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] gap-2 px-6">
                   <Bot className="h-4 w-4" />
                   RAG Assistant
                 </Button>
@@ -164,33 +164,37 @@ export default function DashboardPage() {
     <AppLayout>
       <div className="space-y-8">
         {/* ── Hero Banner ── */}
-        <div className="border border-black bg-white p-6 sm:p-8 shadow-[6px_6px_0px_#000000]">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 sm:p-8 shadow-[6px_6px_0px_#000000] dark:shadow-[6px_6px_0px_#FFFFFF]">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="inline-block w-2.5 h-2.5 bg-[#FF0000]" />
-                <span className="text-xs font-mono font-bold tracking-widest text-black uppercase">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#FF0000] uppercase">
                   [ 00 / EXECUTIVE INTELLIGENCE ]
                 </span>
+                <span className="h-4 w-px bg-black dark:bg-white" />
+                <span className="text-xs font-mono font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+                  CONSOLIDATED STATEMENTS &amp; DIAGNOSTICS
+                </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-black leading-none mb-3">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-black dark:text-white leading-none mb-3">
                 {activeDocument.company_name ? activeDocument.company_name : "FINANCIAL"} <span className="stroke-text-thick">INTELLIGENCE</span>
               </h1>
-              <div className="text-xs font-mono text-black flex flex-wrap items-center gap-3">
-                <span className="border border-black bg-zinc-100 px-2 py-0.5 font-bold">
+              <div className="text-xs font-mono text-black dark:text-white flex flex-wrap items-center gap-3">
+                <span className="border border-black dark:border-neutral-700 bg-zinc-100 dark:bg-neutral-900 px-2 py-0.5 font-bold">
                   FILE: {activeDocument.filename}
                 </span>
                 {activeDocument.fiscal_year && (
-                  <span className="border border-black bg-white px-2 py-0.5 font-bold">
+                  <span className="border border-black dark:border-neutral-700 bg-white dark:bg-black px-2 py-0.5 font-bold">
                     FY {activeDocument.fiscal_year}
                   </span>
                 )}
                 {activeDocument.fiscal_period && (
-                  <span className="border border-black bg-white px-2 py-0.5 font-bold">
+                  <span className="border border-black dark:border-neutral-700 bg-white dark:bg-black px-2 py-0.5 font-bold">
                     PERIOD: {activeDocument.fiscal_period}
                   </span>
                 )}
-                <span className="border border-black bg-black text-white px-2 py-0.5 font-bold uppercase">
+                <span className="border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 font-bold uppercase">
                   STATUS: {activeDocument.status}
                 </span>
               </div>
@@ -198,14 +202,14 @@ export default function DashboardPage() {
 
             <div className="flex items-center gap-3 shrink-0">
               <Link href="/documents">
-                <Button variant="outline" size="sm" className="bg-white text-black hover:bg-black hover:text-white border border-black rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] gap-2 px-4">
+                <Button variant="outline" size="sm" className="bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border-2 border-black dark:border-white rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] gap-2 px-4 cursor-pointer">
                   <FolderUp className="h-4 w-4 text-[#FF0000]" />
                   Upload
                 </Button>
               </Link>
               <Link href="/chat">
-                <Button size="sm" className="bg-black text-white hover:bg-black/90 border border-black rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] gap-2 px-4">
-                  <Bot className="h-4 w-4 text-[#FF0000]" />
+                <Button size="sm" className="bg-black dark:bg-white text-white dark:text-black hover:bg-[#FF0000] hover:text-white dark:hover:bg-[#FF0000] dark:hover:text-white border-2 border-black dark:border-white rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#FF0000] gap-2 px-4 cursor-pointer">
+                  <Bot className="h-4 w-4" />
                   Ask AI
                 </Button>
               </Link>
@@ -215,16 +219,16 @@ export default function DashboardPage() {
 
         {/* ── KPI Cards Row ── */}
         <section>
-          <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+          <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-black">
+              <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                 [ 01 / METRICS ]
               </span>
-              <h2 className="text-sm font-black uppercase tracking-wider text-black">
+              <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                 Key Financial Indicators
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-zinc-600 uppercase">
+            <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               STANDARDIZED GAAP / IFRS
             </span>
           </div>
@@ -279,30 +283,30 @@ export default function DashboardPage() {
 
         {/* ── Health Gauge + Radar Row ── */}
         <section>
-          <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+          <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-[#FF0000]">
+              <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                 [ 02 / ANALYSIS ]
               </span>
-              <h2 className="text-sm font-black uppercase tracking-wider text-black">
+              <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                 Corporate Solvency &amp; Dimension Radar
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-zinc-600 uppercase">
+            <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               5-AXIS DIAGNOSTIC
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Health Gauge */}
-            <Card className="flex flex-col border border-black bg-white shadow-[4px_4px_0px_#000000] rounded-none">
-              <CardHeader className="border-b border-black pb-3">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-black flex items-center justify-between">
+            <Card className="flex flex-col border-2 border-black dark:border-white bg-white dark:bg-black shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none">
+              <CardHeader className="border-b-2 border-black dark:border-white pb-3">
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <Target className="h-4 w-4 text-[#FF0000]" />
                     5-Dimension Health Index
                   </span>
-                  <span className="text-[10px] font-mono font-normal text-zinc-500 uppercase">
+                  <span className="text-[10px] font-mono font-normal text-neutral-500 dark:text-neutral-400 uppercase">
                     SCALE: 0-100
                   </span>
                 </CardTitle>
@@ -325,12 +329,12 @@ export default function DashboardPage() {
                     ].map(({ label, value }) => (
                       <div
                         key={label}
-                        className="flex flex-col items-center border border-black bg-white px-3 py-2 shadow-[2px_2px_0px_#000000]"
+                        className="flex flex-col items-center border-2 border-black dark:border-white bg-white dark:bg-black px-3 py-2 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]"
                       >
-                        <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-0.5">
+                        <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-widest mb-0.5">
                           {label}
                         </span>
-                        <span className="text-lg font-black text-black">
+                        <span className="text-lg font-black text-black dark:text-white">
                           {value != null ? value.toFixed(0) : "—"}
                         </span>
                       </div>
@@ -341,14 +345,14 @@ export default function DashboardPage() {
             </Card>
 
             {/* Radar Chart */}
-            <Card className="flex flex-col border border-black bg-white shadow-[4px_4px_0px_#000000] rounded-none">
-              <CardHeader className="border-b border-black pb-3">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-black flex items-center justify-between">
+            <Card className="flex flex-col border-2 border-black dark:border-white bg-white dark:bg-black shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none">
+              <CardHeader className="border-b-2 border-black dark:border-white pb-3">
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <Activity className="h-4 w-4 text-black" />
+                    <Activity className="h-4 w-4 text-black dark:text-white" />
                     Financial Dimension Radar
                   </span>
-                  <span className="text-[10px] font-mono font-normal text-zinc-500 uppercase">
+                  <span className="text-[10px] font-mono font-normal text-neutral-500 dark:text-neutral-400 uppercase">
                     POLAR PROJECTION
                   </span>
                 </CardTitle>
@@ -371,30 +375,30 @@ export default function DashboardPage() {
 
         {/* ── Charts Row ── */}
         <section>
-          <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+          <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-black">
+              <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                 [ 03 / TRENDS ]
               </span>
-              <h2 className="text-sm font-black uppercase tracking-wider text-black">
+              <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                 Revenue, Earnings &amp; Capital Structure
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-zinc-600 uppercase">
+            <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               BAR &amp; DONUT ANALYSIS
             </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Revenue Trend Chart (takes 2/3 width) */}
-            <Card className="lg:col-span-2 border border-black bg-white shadow-[4px_4px_0px_#000000] rounded-none">
-              <CardHeader className="border-b border-black pb-3">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-black flex items-center justify-between">
+            <Card className="lg:col-span-2 border-2 border-black dark:border-white bg-white dark:bg-black shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none">
+              <CardHeader className="border-b-2 border-black dark:border-white pb-3">
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <BarChart3 className="h-4 w-4 text-black" />
+                    <BarChart3 className="h-4 w-4 text-black dark:text-white" />
                     Revenue, EBITDA &amp; Net Income Trend
                   </span>
-                  <span className="text-[10px] font-mono font-normal text-zinc-500 uppercase">
+                  <span className="text-[10px] font-mono font-normal text-neutral-500 dark:text-neutral-400 uppercase">
                     HISTORICAL / REPORTED
                   </span>
                 </CardTitle>
@@ -410,14 +414,14 @@ export default function DashboardPage() {
             </Card>
 
             {/* Capital Structure Donut */}
-            <Card className="border border-black bg-white shadow-[4px_4px_0px_#000000] rounded-none">
-              <CardHeader className="border-b border-black pb-3">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-black flex items-center justify-between">
+            <Card className="border-2 border-black dark:border-white bg-white dark:bg-black shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none">
+              <CardHeader className="border-b-2 border-black dark:border-white pb-3">
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <PieChart className="h-4 w-4 text-[#FF0000]" />
                     Capital Allocation
                   </span>
-                  <span className="text-[10px] font-mono font-normal text-zinc-500 uppercase">
+                  <span className="text-[10px] font-mono font-normal text-neutral-500 dark:text-neutral-400 uppercase">
                     EQUITY VS DEBT
                   </span>
                 </CardTitle>
@@ -436,16 +440,16 @@ export default function DashboardPage() {
 
         {/* ── Risk Flags & Executive Insights ── */}
         <section>
-          <div className="flex items-center justify-between mb-4 border-b border-black pb-2">
+          <div className="flex items-center justify-between mb-4 border-b-2 border-black dark:border-white pb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-widest text-[#FF0000]">
+              <span className="text-xs font-black font-mono uppercase tracking-widest text-[#FF0000]">
                 [ 04 / GOVERNANCE ]
               </span>
-              <h2 className="text-sm font-black uppercase tracking-wider text-black">
+              <h2 className="text-sm font-black uppercase tracking-wider text-black dark:text-white">
                 Risk Indicators &amp; RAG Navigation
               </h2>
             </div>
-            <span className="text-[11px] font-mono text-zinc-600 uppercase">
+            <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               AUDIT PROVENANCE
             </span>
           </div>
@@ -462,15 +466,15 @@ export default function DashboardPage() {
 
             {/* Quick Links */}
             <div className="flex flex-col gap-4">
-              <div className="border border-black bg-white p-5 shadow-[4px_4px_0px_#000000] rounded-none flex flex-col gap-3">
-                <div className="flex items-center justify-between border-b border-black pb-2">
-                  <h3 className="text-xs font-black uppercase tracking-widest text-black">
+              <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none flex flex-col gap-3">
+                <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-2">
+                  <h3 className="text-xs font-black uppercase tracking-widest text-black dark:text-white">
                     EXPLORE PLATFORM
                   </h3>
-                  <span className="text-[10px] font-mono text-zinc-600 uppercase">DEEP DIVE</span>
+                  <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">DEEP DIVE</span>
                 </div>
                 <Link href="/analysis" className="block">
-                  <Button variant="outline" size="sm" className="w-full justify-between border border-black bg-white hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000]">
+                  <Button variant="outline" size="sm" className="w-full justify-between border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
                     <span className="flex items-center gap-2">
                       <BarChart3 className="h-4 w-4" />
                       Financial Statements
@@ -479,7 +483,7 @@ export default function DashboardPage() {
                   </Button>
                 </Link>
                 <Link href="/chat" className="block">
-                  <Button variant="outline" size="sm" className="w-full justify-between border border-black bg-white hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000]">
+                  <Button variant="outline" size="sm" className="w-full justify-between border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
                     <span className="flex items-center gap-2">
                       <Bot className="h-4 w-4 text-[#FF0000]" />
                       AI Analyst / Q&amp;A
@@ -488,7 +492,7 @@ export default function DashboardPage() {
                   </Button>
                 </Link>
                 <Link href="/compare" className="block">
-                  <Button variant="outline" size="sm" className="w-full justify-between border border-black bg-white hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000]">
+                  <Button variant="outline" size="sm" className="w-full justify-between border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
                     <span className="flex items-center gap-2">
                       <Layers className="h-4 w-4" />
                       Peer Benchmarking
@@ -497,7 +501,7 @@ export default function DashboardPage() {
                   </Button>
                 </Link>
                 <Link href="/audit" className="block">
-                  <Button variant="outline" size="sm" className="w-full justify-between border border-black bg-white hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000]">
+                  <Button variant="outline" size="sm" className="w-full justify-between border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-bold uppercase tracking-wider text-xs shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
                     <span className="flex items-center gap-2">
                       <Activity className="h-4 w-4" />
                       Audit Logs
@@ -509,12 +513,12 @@ export default function DashboardPage() {
 
               {/* Ratio Summary Card */}
               {ratiosData && (
-                <div className="border border-black bg-white p-5 shadow-[4px_4px_0px_#000000] rounded-none">
-                  <div className="flex items-center justify-between border-b border-black pb-2 mb-3">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-black">
+                <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] rounded-none">
+                  <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-2 mb-3">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-black dark:text-white">
                       KEY RATIOS
                     </h3>
-                    <span className="text-[10px] font-mono text-zinc-600 uppercase">SUMMARY</span>
+                    <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">SUMMARY</span>
                   </div>
                   <div className="space-y-2 font-mono text-xs">
                     {[
@@ -527,9 +531,9 @@ export default function DashboardPage() {
                     ]
                       .filter((r) => r.value != null)
                       .map(({ label, value, suffix }) => (
-                        <div key={label} className="flex items-center justify-between border-b border-zinc-200 pb-1">
-                          <span className="text-zinc-600 uppercase">{label}</span>
-                          <span className="font-black text-black">
+                        <div key={label} className="flex items-center justify-between border-b border-zinc-200 dark:border-neutral-800 pb-1">
+                          <span className="text-neutral-600 dark:text-neutral-400 uppercase">{label}</span>
+                          <span className="font-black text-black dark:text-white">
                             {value!.toFixed(2)}
                             {suffix}
                           </span>

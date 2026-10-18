@@ -141,18 +141,18 @@ function getRatioStatus(
 
 const STATUS_STYLES = {
   good: {
-    bar: "bg-black",
-    badge: "text-black bg-white border-black",
+    bar: "bg-black dark:bg-white",
+    badge: "text-black dark:text-white bg-white dark:bg-black border-black dark:border-white",
     label: "HEALTHY",
   },
   warn: {
-    bar: "bg-zinc-800",
-    badge: "text-black bg-zinc-200 border-black",
+    bar: "bg-zinc-800 dark:bg-neutral-600",
+    badge: "text-black dark:text-white bg-zinc-200 dark:bg-neutral-800 border-black dark:border-neutral-700",
     label: "MONITOR",
   },
   danger: {
     bar: "bg-[#FF0000]",
-    badge: "text-white bg-[#FF0000] border-black",
+    badge: "text-white bg-[#FF0000] border-black dark:border-white",
     label: "RISK",
   },
 };
@@ -160,12 +160,12 @@ const STATUS_STYLES = {
 function RatioCard({ def, value }: { def: RatioDef; value: number | null | undefined }) {
   if (value == null) {
     return (
-      <div className="border border-black bg-white p-5 flex flex-col gap-2 opacity-40 shadow-[2px_2px_0px_#000000]">
-        <div className="flex items-start justify-between gap-2 border-b border-black pb-2">
-          <span className="text-xs font-mono font-bold uppercase text-black">{def.label}</span>
-          <span className="text-xs font-mono text-zinc-400">N/A</span>
+      <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 flex flex-col gap-2 opacity-40 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
+        <div className="flex items-start justify-between gap-2 border-b-2 border-black dark:border-white pb-2">
+          <span className="text-xs font-mono font-bold uppercase text-black dark:text-white">{def.label}</span>
+          <span className="text-xs font-mono text-neutral-400">N/A</span>
         </div>
-        <p className="text-[11px] font-mono text-zinc-500 leading-relaxed">{def.description}</p>
+        <p className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 leading-relaxed">{def.description}</p>
       </div>
     );
   }
@@ -183,11 +183,11 @@ function RatioCard({ def, value }: { def: RatioDef; value: number | null | undef
   }
 
   return (
-    <div className="border border-black bg-white p-5 flex flex-col gap-3 shadow-[4px_4px_0px_#000000] hover:shadow-[6px_6px_0px_#000000] transition-shadow">
-      <div className="flex items-start justify-between gap-2 border-b border-black pb-2">
-        <span className="text-xs font-black uppercase tracking-wider text-black">{def.label}</span>
+    <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 flex flex-col gap-3 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] hover:shadow-[6px_6px_0px_#000000] dark:hover:shadow-[6px_6px_0px_#FFFFFF] transition-shadow">
+      <div className="flex items-start justify-between gap-2 border-b-2 border-black dark:border-white pb-2">
+        <span className="text-xs font-black uppercase tracking-wider text-black dark:text-white">{def.label}</span>
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xl font-black text-black">
+          <span className="text-xl font-black text-black dark:text-white">
             {value.toFixed(2)}{def.suffix}
           </span>
           <span
@@ -202,7 +202,7 @@ function RatioCard({ def, value }: { def: RatioDef; value: number | null | undef
       </div>
 
       {/* Progress bar */}
-      <div className="h-2 w-full border border-black bg-zinc-100 p-0.5">
+      <div className="h-2 w-full border border-black dark:border-white bg-zinc-100 dark:bg-neutral-900 p-0.5">
         <div
           className={cn("h-full transition-all duration-500", styles.bar)}
           style={{ width: `${barPct}%` }}
@@ -210,9 +210,9 @@ function RatioCard({ def, value }: { def: RatioDef; value: number | null | undef
       </div>
 
       <div className="flex items-center justify-between gap-2 text-xs font-mono">
-        <p className="text-zinc-600 text-[11px] leading-relaxed flex-1">{def.description}</p>
+        <p className="text-neutral-600 dark:text-neutral-400 text-[11px] leading-relaxed flex-1">{def.description}</p>
         {def.benchmark && (
-          <span className="text-[10px] font-bold text-black border border-black bg-zinc-100 px-1.5 py-0.5 uppercase shrink-0">
+          <span className="text-[10px] font-bold text-black dark:text-white border border-black dark:border-white bg-zinc-100 dark:bg-neutral-900 px-1.5 py-0.5 uppercase shrink-0">
             {def.benchmark}
           </span>
         )}
@@ -225,13 +225,13 @@ function RatioSkeleton({ count }: { count: number }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="border border-black bg-white p-5 space-y-3 shadow-[3px_3px_0px_#000000]">
+        <div key={i} className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 space-y-3 shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF]">
           <div className="flex justify-between">
-            <div className="h-4 w-28 bg-zinc-200 animate-pulse" />
-            <div className="h-4 w-16 bg-zinc-200 animate-pulse" />
+            <div className="h-4 w-28 bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
+            <div className="h-4 w-16 bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
           </div>
-          <div className="h-2 w-full bg-zinc-200 animate-pulse" />
-          <div className="h-3 w-40 bg-zinc-200 animate-pulse" />
+          <div className="h-2 w-full bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
+          <div className="h-3 w-40 bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
         </div>
       ))}
     </div>
@@ -248,11 +248,11 @@ export function RatioGrid({ ratios, isLoading = false }: RatioGridProps) {
     <div className="flex flex-col gap-8">
       {CATEGORIES.map(({ tag, label, ratios: defs }) => (
         <div key={label}>
-          <div className="flex items-center justify-between border-b border-black pb-2 mb-4">
-            <h4 className="text-xs font-black uppercase tracking-widest text-black flex items-center gap-2">
+          <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-2 mb-4">
+            <h4 className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
               <span className="text-[#FF0000]">[ {tag} ]</span> {label}
             </h4>
-            <span className="text-[10px] font-mono text-zinc-500 uppercase">STANDARDIZED FORMULAS</span>
+            <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">STANDARDIZED FORMULAS</span>
           </div>
           {isLoading ? (
             <RatioSkeleton count={defs.length} />
@@ -272,15 +272,15 @@ export function RatioGrid({ ratios, isLoading = false }: RatioGridProps) {
 
       {/* Turnover stub */}
       <div>
-        <div className="flex items-center justify-between border-b border-black pb-2 mb-4">
-          <h4 className="text-xs font-black uppercase tracking-widest text-black flex items-center gap-2">
+        <div className="flex items-center justify-between border-b-2 border-black dark:border-white pb-2 mb-4">
+          <h4 className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
             <span className="text-[#FF0000]">[ 04 ]</span> TURNOVER &amp; EFFICIENCY RATIOS
           </h4>
-          <span className="text-[10px] font-mono text-zinc-500 uppercase">PROJECTION</span>
+          <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">PROJECTION</span>
         </div>
-        <div className="border border-black bg-white p-5 flex items-center gap-4 shadow-[3px_3px_0px_#000000]">
-          <RefreshCw className="h-5 w-5 text-black shrink-0" />
-          <p className="text-xs font-mono uppercase text-zinc-700 leading-relaxed">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-5 flex items-center gap-4 shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF]">
+          <RefreshCw className="h-5 w-5 text-black dark:text-white shrink-0" />
+          <p className="text-xs font-mono uppercase text-neutral-700 dark:text-neutral-300 leading-relaxed">
             Asset Turnover, Receivables Turnover, and Inventory Days metrics will automatically populate once multi-period statement data is ingested.
           </p>
         </div>

@@ -212,10 +212,10 @@ def seed_falkordb_graphs():
             falkor_client.query(
                 """
                 MATCH (rf:RiskFactor {company: $name}), (li:LineItem {company: $name, year: $yr})
-                WHERE (rf.category =~ '(?i).*liquidity.*' AND li.canonical_name IN ['CASH_EQUIVALENTS', 'CURRENT_LIABILITIES'])
-                   OR (rf.category =~ '(?i).*interest.*' AND li.canonical_name IN ['TOTAL_DEBT'])
-                   OR (rf.category =~ '(?i).*supply chain.*' AND li.canonical_name IN ['REVENUE', 'OPERATING_INCOME'])
-                   OR (rf.category =~ '(?i).*price war.*' AND li.canonical_name IN ['OPERATING_INCOME'])
+                WHERE (toLower(rf.category) CONTAINS 'liquidity' AND li.canonical_name IN ['CASH_EQUIVALENTS', 'CURRENT_LIABILITIES'])
+                   OR (toLower(rf.category) CONTAINS 'interest' AND li.canonical_name IN ['TOTAL_DEBT'])
+                   OR (toLower(rf.category) CONTAINS 'supply' AND li.canonical_name IN ['REVENUE', 'OPERATING_INCOME'])
+                   OR (toLower(rf.category) CONTAINS 'price' AND li.canonical_name IN ['OPERATING_INCOME'])
                 MERGE (rf)-[:THREATENS]->(li)
                 """,
                 {"name": c_name, "yr": yr},

@@ -63,20 +63,20 @@ export function ChatInputBar({
   };
 
   return (
-    <div className="border-t-2 border-black bg-white p-4 shadow-[0_-4px_0px_#000000]">
+    <div className="border-t-2 border-black dark:border-white bg-white dark:bg-black p-4 shadow-[0_-4px_0px_#000000] dark:shadow-[0_-4px_0px_#FFFFFF]">
       <div className="mx-auto max-w-4xl space-y-3">
         {/* Controls row */}
-        <div className="flex items-center justify-between text-xs font-mono text-zinc-600">
+        <div className="flex items-center justify-between text-xs font-mono text-neutral-600 dark:text-neutral-400">
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-black">
-              <kbd className="px-1.5 py-0.5 border border-black bg-white font-mono text-[9px] shadow-[1px_1px_0px_#000000]">
+            <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-black dark:text-white">
+              <kbd className="px-1.5 py-0.5 border border-black dark:border-white bg-white dark:bg-black font-mono text-[9px] shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF]">
                 ENTER
               </kbd>
               <span>SUBMIT</span>
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-black">
-              <kbd className="px-1.5 py-0.5 border border-black bg-white font-mono text-[9px] shadow-[1px_1px_0px_#000000]">
+            <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-black dark:text-white">
+              <kbd className="px-1.5 py-0.5 border border-black dark:border-white bg-white dark:bg-black font-mono text-[9px] shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF]">
                 SHIFT + ENTER
               </kbd>
               <span>LINE BREAK</span>
@@ -90,7 +90,7 @@ export function ChatInputBar({
                 type="button"
                 onClick={onExportMarkdown}
                 title="Export conversation to Markdown (.md)"
-                className="flex items-center gap-1.5 px-2.5 py-1 border border-black bg-white hover:bg-black hover:text-white transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000]"
+                className="flex items-center gap-1.5 px-2.5 py-1 border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF] cursor-pointer"
               >
                 <FileDown className="h-3 w-3" />
                 <span>EXPORT MD</span>
@@ -100,7 +100,7 @@ export function ChatInputBar({
                 type="button"
                 onClick={onPrintReport}
                 title="Print or save as PDF"
-                className="flex items-center gap-1.5 px-2.5 py-1 border border-black bg-white hover:bg-black hover:text-white transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000]"
+                className="flex items-center gap-1.5 px-2.5 py-1 border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF] cursor-pointer"
               >
                 <Printer className="h-3 w-3" />
                 <span>PRINT PDF</span>
@@ -110,7 +110,7 @@ export function ChatInputBar({
                 type="button"
                 onClick={onClearThread}
                 title="Clear current conversation"
-                className="flex items-center gap-1.5 px-2.5 py-1 border border-black bg-white hover:bg-[#FF0000] hover:text-white text-black transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000]"
+                className="flex items-center gap-1.5 px-2.5 py-1 border border-black dark:border-white bg-white dark:bg-black hover:bg-[#FF0000] hover:text-white text-black dark:text-white transition-colors text-[10px] font-mono font-bold uppercase shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF] cursor-pointer"
               >
                 <Trash2 className="h-3 w-3" />
                 <span>CLEAR</span>
@@ -120,7 +120,7 @@ export function ChatInputBar({
         </div>
 
         {/* Input box */}
-        <div className="relative flex items-end gap-2 border-2 border-black bg-white p-2 shadow-[4px_4px_0px_#000000]">
+        <div className="relative flex items-end gap-2 border-2 border-black dark:border-white bg-white dark:bg-black p-2 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF]">
           <textarea
             ref={textareaRef}
             rows={1}
@@ -129,7 +129,7 @@ export function ChatInputBar({
             onKeyDown={handleKeyDown}
             disabled={disabled || isGenerating}
             placeholder={placeholder}
-            className="flex-1 max-h-40 min-h-[44px] resize-none bg-transparent px-3 py-2 text-xs font-mono font-bold uppercase text-black placeholder:text-zinc-400 focus:outline-none disabled:opacity-50"
+            className="flex-1 max-h-40 min-h-[44px] resize-none bg-transparent px-3 py-2 text-xs font-mono font-bold uppercase text-black dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none disabled:opacity-50"
           />
 
           <Button
@@ -137,7 +137,7 @@ export function ChatInputBar({
             onClick={() => handleSubmit()}
             disabled={!input.trim() || isGenerating || disabled}
             size="sm"
-            className="h-10 px-5 rounded-none border border-black bg-black text-white hover:bg-black/90 shrink-0 gap-2 font-black uppercase text-xs tracking-wider shadow-[2px_2px_0px_#FF0000]"
+            className="h-10 px-5 rounded-none border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black hover:bg-[#FF0000] hover:text-white dark:hover:bg-[#FF0000] dark:hover:text-white shrink-0 gap-2 font-black uppercase text-xs tracking-wider shadow-[2px_2px_0px_#FF0000] cursor-pointer"
           >
             {isGenerating ? (
               <>

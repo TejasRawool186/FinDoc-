@@ -99,19 +99,23 @@ export default function ComparePage() {
     <AppLayout>
       <div className="space-y-8 max-w-6xl mx-auto">
         {/* Header Banner */}
-        <div className="border border-black bg-white p-6 sm:p-8 shadow-[6px_6px_0px_#000000]">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 sm:p-8 shadow-[6px_6px_0px_#000000] dark:shadow-[6px_6px_0px_#FFFFFF]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="inline-block w-2.5 h-2.5 bg-[#FF0000]" />
-                <span className="text-xs font-mono font-bold tracking-widest text-black uppercase">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#FF0000] uppercase">
                   [ 04 / BENCHMARKING ] COMPARATIVE ANALYTICS
                 </span>
+                <span className="h-4 w-px bg-black dark:bg-white" />
+                <span className="text-xs font-mono font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+                  CROSS-ENTITY VARIANCE
+                </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-black leading-none mb-2">
+              <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-black dark:text-white leading-none mb-2">
                 PEER &amp; PERIOD <span className="stroke-text-thick">BENCHMARKING</span>
               </h1>
-              <p className="text-xs font-mono text-zinc-600 uppercase">
+              <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
                 CROSS-COMPANY AND MULTI-YEAR VARIANCE ANALYSIS, DELTA MULTIPLES, AND RISK DRIFT
               </p>
             </div>
@@ -120,7 +124,7 @@ export default function ComparePage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border border-black bg-white hover:bg-black hover:text-white rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] gap-2 px-4"
+                className="border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black rounded-none font-black uppercase tracking-wider text-xs shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] gap-2 px-4 cursor-pointer"
               >
                 <FolderUp className="h-3.5 w-3.5 text-[#FF0000]" />
                 <span>UPLOAD</span>
@@ -131,20 +135,20 @@ export default function ComparePage() {
 
         {/* If fewer than 2 documents exist */}
         {documents.length < 2 && !docsLoading && (
-          <div className="border-2 border-black bg-white p-10 text-center space-y-4 shadow-[6px_6px_0px_#000000]">
-            <div className="inline-block border border-black bg-black text-white px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase">
+          <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-10 text-center space-y-4 shadow-[6px_6px_0px_#000000] dark:shadow-[6px_6px_0px_#FFFFFF]">
+            <div className="inline-block border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase">
               [ REQUIREMENT: &ge; 2 FILINGS ]
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black uppercase text-black">
+            <h2 className="text-2xl sm:text-3xl font-black uppercase text-black dark:text-white">
               INSUFFICIENT FILINGS FOR COMPARISON
             </h2>
-            <p className="text-xs font-mono text-zinc-600 max-w-md mx-auto leading-relaxed uppercase">
+            <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 max-w-md mx-auto leading-relaxed uppercase">
               Currently, only {documents.length} filing is indexed. Please upload an additional report
               (e.g., FY2023 vs FY2024, or a peer competitor) to compute variance deltas.
             </p>
             <div className="pt-2">
               <Link href="/documents">
-                <Button className="bg-black text-white hover:bg-black/90 font-black uppercase text-xs rounded-none border border-black shadow-[3px_3px_0px_#FF0000] px-6">
+                <Button className="bg-black dark:bg-white text-white dark:text-black hover:bg-[#FF0000] hover:text-white dark:hover:bg-[#FF0000] dark:hover:text-white font-black uppercase text-xs rounded-none border border-black dark:border-white shadow-[3px_3px_0px_#FF0000] px-6 cursor-pointer">
                   Upload Additional Filing
                 </Button>
               </Link>
@@ -179,7 +183,7 @@ export default function ComparePage() {
 
             {/* Error or Empty */}
             {comparisonError && (
-              <div className="border border-black bg-[#FF0000] text-white p-4 text-xs font-mono uppercase shadow-[3px_3px_0px_#000000] flex items-center gap-2">
+              <div className="border-2 border-black dark:border-white bg-[#FF0000] text-white p-4 text-xs font-mono uppercase shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF] flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>
                   Failed to compute comparative metrics. Ensure the backend /compare endpoint is active.
@@ -213,7 +217,7 @@ export default function ComparePage() {
             )}
 
             {deltas.length === 0 && !comparisonLoading && !comparisonError && (
-              <div className="border border-black bg-white p-8 text-center text-zinc-500 text-xs font-mono uppercase shadow-[3px_3px_0px_#000000]">
+              <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-8 text-center text-neutral-500 dark:text-neutral-400 text-xs font-mono uppercase shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF]">
                 NO OVERLAPPING STANDARDIZED FINANCIAL METRICS WERE FOUND ACROSS THESE TWO FILINGS TO COMPUTE DELTAS.
               </div>
             )}

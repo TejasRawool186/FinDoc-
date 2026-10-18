@@ -106,42 +106,42 @@ function StatementRow({
   return (
     <tr
       className={cn(
-        "group border-b border-zinc-200 transition-colors",
-        hasValue ? "hover:bg-zinc-100 cursor-pointer" : "opacity-40"
+        "group border-b border-black dark:border-neutral-800 transition-colors",
+        hasValue ? "hover:bg-zinc-100 dark:hover:bg-neutral-900 cursor-pointer" : "opacity-40"
       )}
       onClick={() => hasValue && metric && onChunkClick?.(metric)}
     >
-      <td className={cn("py-3 pl-4 pr-2 font-mono text-xs", isSubItem ? "pl-8 text-zinc-600" : "text-black font-bold")}>
-        {isSubItem && <span className="mr-1.5 text-zinc-400">└</span>}
+      <td className={cn("py-3 pl-4 pr-2 font-mono text-xs", isSubItem ? "pl-8 text-neutral-600 dark:text-neutral-400" : "text-black dark:text-white font-bold")}>
+        {isSubItem && <span className="mr-1.5 text-neutral-400">└</span>}
         {label}
       </td>
-      <td className="py-3 px-3 text-right font-mono text-xs font-black text-black">
+      <td className="py-3 px-3 text-right font-mono text-xs font-black text-black dark:text-white">
         {valueStr}
       </td>
       <td className="py-3 px-3 text-center hidden sm:table-cell">
         {hasValue ? (
           <span
             className={cn(
-              "inline-flex items-center px-2 py-0.5 text-[9px] font-mono font-black uppercase border border-black",
+              "inline-flex items-center px-2 py-0.5 text-[9px] font-mono font-black uppercase border border-black dark:border-white",
               conf >= 0.85
-                ? "bg-black text-white"
+                ? "bg-black dark:bg-white text-white dark:text-black"
                 : conf >= 0.6
-                ? "bg-zinc-200 text-black"
+                ? "bg-zinc-200 dark:bg-neutral-800 text-black dark:text-white"
                 : "bg-[#FF0000] text-white"
             )}
           >
             {confPct}% CONF
           </span>
         ) : (
-          <span className="text-zinc-400 text-xs font-mono">—</span>
+          <span className="text-neutral-400 text-xs font-mono">—</span>
         )}
       </td>
-      <td className="py-3 pr-4 text-center hidden md:table-cell font-mono text-xs text-zinc-600">
+      <td className="py-3 pr-4 text-center hidden md:table-cell font-mono text-xs text-neutral-600 dark:text-neutral-400">
         {metric?.source_page ? `PAGE ${metric.source_page}` : "—"}
       </td>
       <td className="py-3 pr-4 text-right hidden lg:table-cell">
         {hasValue && onChunkClick && (
-          <ChevronRight className="ml-auto h-4 w-4 text-black group-hover:text-[#FF0000] transition-colors" />
+          <ChevronRight className="ml-auto h-4 w-4 text-black dark:text-white group-hover:text-[#FF0000] transition-colors" />
         )}
       </td>
     </tr>
@@ -203,22 +203,22 @@ export function StatementTabs({
   ];
 
   return (
-    <div className="border border-black bg-white shadow-[4px_4px_0px_#000000]">
+    <div className="border-2 border-black dark:border-white bg-white dark:bg-black shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF]">
       {/* Tab Bar */}
-      <div className="flex border-b border-black bg-zinc-100 overflow-x-auto">
+      <div className="flex border-b-2 border-black dark:border-white bg-zinc-100 dark:bg-neutral-900 overflow-x-auto">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             id={`tab-${id}`}
             onClick={() => setActiveTab(id)}
             className={cn(
-              "flex items-center gap-2 whitespace-nowrap px-6 py-3.5 text-xs font-mono font-black uppercase tracking-wider transition-all border-r border-black",
+              "flex items-center gap-2 whitespace-nowrap px-6 py-3.5 text-xs font-mono font-black uppercase tracking-wider transition-all border-r-2 border-black dark:border-white cursor-pointer",
               activeTab === id
-                ? "bg-black text-white"
-                : "bg-white text-black hover:bg-zinc-50"
+                ? "bg-black dark:bg-white text-white dark:text-black"
+                : "bg-white dark:bg-neutral-900 text-black dark:text-white hover:bg-zinc-50 dark:hover:bg-neutral-800"
             )}
           >
-            <Icon className={cn("h-3.5 w-3.5", activeTab === id ? "text-[#FF0000]" : "text-black")} />
+            <Icon className={cn("h-3.5 w-3.5", activeTab === id ? "text-[#FF0000]" : "text-black dark:text-white")} />
             {label}
           </button>
         ))}
@@ -229,8 +229,8 @@ export function StatementTabs({
         <TableSkeleton rows={10} />
       ) : metrics.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 gap-3">
-          <FileText className="h-10 w-10 text-zinc-400" />
-          <p className="text-xs font-mono uppercase text-zinc-500">
+          <FileText className="h-10 w-10 text-neutral-400" />
+          <p className="text-xs font-mono uppercase text-neutral-500 dark:text-neutral-400">
             NO LINE ITEMS EXTRACTED FOR ACTIVE FILING YET.
           </p>
         </div>
@@ -238,17 +238,17 @@ export function StatementTabs({
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-black bg-black text-white">
-                <th className="py-2.5 pl-4 text-left text-[10px] font-mono font-black uppercase tracking-widest text-white">
+              <tr className="border-b-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black">
+                <th className="py-2.5 pl-4 text-left text-[10px] font-mono font-black uppercase tracking-widest text-white dark:text-black">
                   STANDARDIZED LINE ITEM
                 </th>
-                <th className="py-2.5 px-3 text-right text-[10px] font-mono font-black uppercase tracking-widest text-white">
+                <th className="py-2.5 px-3 text-right text-[10px] font-mono font-black uppercase tracking-widest text-white dark:text-black">
                   REPORTED VALUE
                 </th>
-                <th className="py-2.5 px-3 text-center text-[10px] font-mono font-black uppercase tracking-widest text-white hidden sm:table-cell">
+                <th className="py-2.5 px-3 text-center text-[10px] font-mono font-black uppercase tracking-widest text-white dark:text-black hidden sm:table-cell">
                   CONFIDENCE
                 </th>
-                <th className="py-2.5 pr-4 text-center text-[10px] font-mono font-black uppercase tracking-widest text-white hidden md:table-cell">
+                <th className="py-2.5 pr-4 text-center text-[10px] font-mono font-black uppercase tracking-widest text-white dark:text-black hidden md:table-cell">
                   PROVENANCE PAGE
                 </th>
                 <th className="py-2.5 pr-4 hidden lg:table-cell" />

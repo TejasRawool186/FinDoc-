@@ -68,61 +68,61 @@ export function ErrorCatalogTable() {
   );
 
   return (
-    <div className="border border-black bg-white p-6 shadow-[4px_4px_0px_#000000] space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black pb-3">
+    <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-6 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-black dark:border-white pb-3">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-[#FF0000]" />
           <div>
-            <h4 className="text-xs font-black uppercase tracking-wider text-black">
+            <h4 className="text-xs font-black uppercase tracking-wider text-black dark:text-white">
               <span className="text-[#FF0000]">[ 03 / CATALOG ]</span> ERROR &amp; FAULT ISOLATION SPECIFICATION
             </h4>
-            <p className="text-[10px] font-mono text-zinc-600 uppercase mt-0.5">
+            <p className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase mt-0.5">
               STANDARDIZED ERROR CODES, FAILURE DOMAINS, AND REMEDIATION ACTIONS
             </p>
           </div>
         </div>
 
         <div className="relative w-48 sm:w-64">
-          <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-neutral-500" />
           <Input
             placeholder="SEARCH ERROR CODE OR DOMAIN..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="h-8 pl-8 text-xs font-mono uppercase rounded-none border border-black bg-white text-black placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:border-black shadow-[1px_1px_0px_#000000]"
+            className="h-8 pl-8 text-xs font-mono uppercase rounded-none border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus-visible:ring-0 focus-visible:border-black dark:focus-visible:border-white shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF]"
           />
         </div>
       </div>
 
       <Table>
-        <TableHeader className="bg-black text-white border-b-2 border-black">
-          <TableRow className="bg-black text-white hover:bg-black border-b-2 border-black">
-            <TableHead className="bg-black text-white font-mono font-black text-[11px] uppercase tracking-wider w-28">
+        <TableHeader className="bg-black dark:bg-white text-white dark:text-black border-b-2 border-black dark:border-white">
+          <TableRow className="bg-black dark:bg-white text-white dark:text-black hover:bg-black dark:hover:bg-white border-b-2 border-black dark:border-white">
+            <TableHead className="bg-black dark:bg-white text-white dark:text-black font-mono font-black text-[11px] uppercase tracking-wider w-28">
               CODE
             </TableHead>
-            <TableHead className="bg-black text-white font-mono font-black text-[11px] uppercase tracking-wider w-48">
+            <TableHead className="bg-black dark:bg-white text-white dark:text-black font-mono font-black text-[11px] uppercase tracking-wider w-48">
               DOMAIN
             </TableHead>
-            <TableHead className="bg-black text-white font-mono font-black text-[11px] uppercase tracking-wider">
+            <TableHead className="bg-black dark:bg-white text-white dark:text-black font-mono font-black text-[11px] uppercase tracking-wider">
               DESCRIPTION &amp; ROOT CAUSE
             </TableHead>
-            <TableHead className="bg-black text-white font-mono font-black text-[11px] uppercase tracking-wider">
+            <TableHead className="bg-black dark:bg-white text-white dark:text-black font-mono font-black text-[11px] uppercase tracking-wider">
               AUDITOR REMEDIATION ACTION
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="divide-y divide-zinc-200 text-xs font-mono">
+        <TableBody className="divide-y divide-zinc-200 dark:divide-neutral-800 text-xs font-mono">
           {filteredErrors.map((item) => (
-            <TableRow key={item.code} className="hover:bg-zinc-100 transition-colors">
+            <TableRow key={item.code} className="hover:bg-zinc-100 dark:hover:bg-neutral-900 transition-colors border-b border-black dark:border-neutral-800">
               <TableCell className="font-mono font-black text-[#FF0000]">
                 {item.code}
               </TableCell>
-              <TableCell className="font-bold text-black uppercase">
+              <TableCell className="font-bold text-black dark:text-white uppercase">
                 {item.domain}
               </TableCell>
-              <TableCell className="text-black uppercase leading-relaxed">
+              <TableCell className="text-black dark:text-white uppercase leading-relaxed">
                 {item.description}
               </TableCell>
-              <TableCell className="text-zinc-600 uppercase text-[11px] leading-relaxed">
+              <TableCell className="text-neutral-600 dark:text-neutral-400 uppercase text-[11px] leading-relaxed">
                 {item.remediation}
               </TableCell>
             </TableRow>

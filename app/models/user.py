@@ -2,7 +2,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, String, Uuid
+from sqlalchemy import Boolean, Column, DateTime, String, Uuid
 from sqlalchemy.orm import relationship
 
 from app.db.base import Base
@@ -15,8 +15,9 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False, index=True)
     full_name = Column(String(255), nullable=True)
     hashed_password = Column(String(255), nullable=True)
-    is_active = Column(String(10), default="true", nullable=False)
+    is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
     documents = relationship(
         "Document",

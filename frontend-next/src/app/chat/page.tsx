@@ -202,37 +202,37 @@ export default function ChatPage() {
     <AppLayout>
       <div className="flex flex-col h-[calc(100vh-130px)] max-w-5xl mx-auto space-y-4">
         {/* Document Context Header Banner */}
-        <div className="border border-black bg-white p-4 shadow-[4px_4px_0px_#000000] flex items-center justify-between gap-4 shrink-0">
+        <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] flex items-center justify-between gap-4 shrink-0">
           <div className="flex items-center gap-3.5 min-w-0">
-            <div className="h-9 w-9 border border-black bg-black text-white flex items-center justify-center shrink-0">
+            <div className="h-9 w-9 border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shrink-0">
               <Activity className="h-4 w-4 text-[#FF0000]" />
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
+              <div className="text-[10px] font-mono font-bold tracking-widest uppercase text-neutral-500 dark:text-neutral-400">
                 [ 03 / RAG ] ACTIVE ANALYTICS CONTEXT
               </div>
-              <h1 className="text-base font-black uppercase text-black truncate leading-tight">
+              <h1 className="text-base font-black uppercase text-black dark:text-white truncate leading-tight">
                 {activeDocument.company_name || activeDocument.filename}
-                <span className="text-zinc-400 mx-2 font-normal">•</span>
-                <span className="text-black font-black">{periodText}</span>
-                <span className="text-zinc-400 mx-2 font-normal">•</span>
-                <span className="text-zinc-600 font-mono text-xs">{currency}</span>
+                <span className="text-neutral-400 mx-2 font-normal">•</span>
+                <span className="text-black dark:text-white font-black">{periodText}</span>
+                <span className="text-neutral-400 mx-2 font-normal">•</span>
+                <span className="text-neutral-600 dark:text-neutral-400 font-mono text-xs">{currency}</span>
               </h1>
             </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 border border-black bg-zinc-100 text-black text-xs font-mono max-w-[240px] truncate font-bold">
+            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 border border-black dark:border-neutral-700 bg-zinc-100 dark:bg-neutral-900 text-black dark:text-white text-xs font-mono max-w-[240px] truncate font-bold">
               <span className="truncate">{activeDocument.filename}</span>
             </span>
 
             <button
               type="button"
               onClick={() => setIsGraphMode(!isGraphMode)}
-              className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 border border-black transition-colors shadow-[1px_1px_0px_#000000] ${
+              className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 border-2 border-black dark:border-white transition-colors cursor-pointer shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF] ${
                 isGraphMode
-                  ? "bg-[#E63946] text-white"
-                  : "bg-white text-black hover:bg-zinc-100"
+                  ? "bg-[#FF0000] text-white"
+                  : "bg-white dark:bg-black text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-neutral-900"
               }`}
             >
               <span>{isGraphMode ? "🕸️ FALKORDB GRAPH" : "📄 VECTOR RAG"}</span>
@@ -241,7 +241,7 @@ export default function ChatPage() {
             <button
               type="button"
               onClick={() => setShowSuggestions(!showSuggestions)}
-              className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-black px-2.5 py-1 border border-black bg-white hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_#000000]"
+              className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-black dark:text-white px-2.5 py-1 border-2 border-black dark:border-white bg-white dark:bg-black hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]"
             >
               <Sparkles className="h-3.5 w-3.5 text-[#FF0000]" />
               <span className="hidden sm:inline">INQUIRIES</span>
@@ -267,15 +267,15 @@ export default function ChatPage() {
         {/* Message Thread Scroll Area */}
         <div className="flex-1 overflow-y-auto pr-1 space-y-6 pb-6">
           {!hasMessages && (
-            <div className="flex flex-col items-center justify-center py-16 text-center text-black space-y-3 border border-black bg-white p-8 shadow-[4px_4px_0px_#000000]">
-              <div className="h-12 w-12 border border-black bg-black text-white flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center py-16 text-center space-y-3 border-2 border-black dark:border-white bg-white dark:bg-black p-8 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF]">
+              <div className="h-12 w-12 border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black flex items-center justify-center">
                 <Activity className="h-6 w-6 text-[#FF0000]" />
               </div>
               <div>
-                <p className="text-sm font-black uppercase text-black">
+                <p className="text-sm font-black uppercase text-black dark:text-white">
                   CORPUS INDEXED: {activeDocument.company_name || activeDocument.filename}
                 </p>
-                <p className="text-xs font-mono text-zinc-600 max-w-sm mt-1 uppercase">
+                <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 max-w-sm mt-1 uppercase">
                   Select a suggested inquiry above or execute custom natural language financial queries below. All statements are grounded with verifiable page citations.
                 </p>
               </div>
@@ -293,12 +293,12 @@ export default function ChatPage() {
           {/* Thinking / Streaming Bubble */}
           {isGenerating && (
             <div className="flex justify-start gap-3.5 max-w-2xl mr-auto">
-              <div className="h-9 w-9 border border-black bg-black text-white flex items-center justify-center shrink-0">
+              <div className="h-9 w-9 border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shrink-0">
                 <Activity className="h-4 w-4 text-[#FF0000] animate-pulse" />
               </div>
-              <div className="border border-black bg-white p-4 shadow-[4px_4px_0px_#000000] flex items-center gap-3">
+              <div className="border-2 border-black dark:border-white bg-white dark:bg-black p-4 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] flex items-center gap-3">
                 <span className="inline-block w-2.5 h-2.5 bg-[#FF0000] animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase text-black">
+                <span className="text-xs font-mono font-bold uppercase text-black dark:text-white">
                   RETRIEVING VECTOR EMBEDDINGS &amp; CITING DISCLOSURES...
                 </span>
               </div>

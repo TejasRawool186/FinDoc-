@@ -5,10 +5,10 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto rounded-none border border-black bg-white text-black shadow-[4px_4px_0px_#000000]">
+  <div className="relative w-full overflow-auto rounded-none border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF]">
     <table
       ref={ref}
-      className={cn("w-full caption-bottom text-xs font-mono border-collapse bg-white text-black", className)}
+      className={cn("w-full caption-bottom text-xs font-mono border-collapse bg-white dark:bg-black text-black dark:text-white", className)}
       {...props}
     />
   </div>
@@ -22,7 +22,7 @@ const TableHeader = React.forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "border-b-2 border-black bg-black text-white [&_tr]:bg-black [&_tr]:text-white [&_tr]:border-b-black [&_tr]:hover:bg-black [&_th]:bg-black [&_th]:text-white",
+      "border-b-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black [&_tr]:bg-black dark:[&_tr]:bg-white [&_tr]:text-white dark:[&_tr]:text-black [&_tr]:border-b-black dark:[&_tr]:border-b-white [&_tr]:hover:bg-black dark:[&_tr]:hover:bg-white [&_th]:bg-black dark:[&_th]:bg-white [&_th]:text-white dark:[&_th]:text-black",
       className
     )}
     {...props}
@@ -36,7 +36,10 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("bg-white text-black divide-y divide-zinc-200 [&_tr]:bg-white [&_tr]:text-black", className)}
+    className={cn(
+      "bg-white dark:bg-black text-black dark:text-white divide-y divide-zinc-200 dark:divide-neutral-800 [&_tr]:bg-white dark:[&_tr]:bg-black [&_tr]:text-black dark:[&_tr]:text-white",
+      className
+    )}
     {...props}
   />
 ));
@@ -49,7 +52,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b border-black/20 transition-colors hover:bg-zinc-100 data-[state=selected]:bg-zinc-100",
+      "border-b border-black/20 dark:border-white/20 transition-colors hover:bg-zinc-100 dark:hover:bg-neutral-900 data-[state=selected]:bg-zinc-100 dark:data-[state=selected]:bg-neutral-900",
       className
     )}
     {...props}
@@ -64,7 +67,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-11 px-4 text-left align-middle font-mono font-black text-white bg-black text-[11px] tracking-wider uppercase select-none [&:has([role=checkbox])]:pr-0",
+      "h-11 px-4 text-left align-middle font-mono font-black text-white dark:text-black bg-black dark:bg-white text-[11px] tracking-wider uppercase select-none [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
@@ -79,7 +82,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "p-3.5 align-middle font-mono text-xs text-black [&:has([role=checkbox])]:pr-0",
+      "p-3.5 align-middle font-mono text-xs text-black dark:text-white [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}

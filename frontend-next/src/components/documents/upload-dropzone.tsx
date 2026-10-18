@@ -88,22 +88,22 @@ export function UploadDropzone({
           onDrop={handleDrop}
           onClick={() => !disabled && fileInputRef.current?.click()}
           className={cn(
-            "group relative flex flex-col items-center justify-center border-2 border-black p-10 sm:p-14 text-center transition-all cursor-pointer bg-white",
+            "group relative flex flex-col items-center justify-center border-2 border-black dark:border-white p-10 sm:p-14 text-center transition-all cursor-pointer bg-white dark:bg-black",
             isDragging
-              ? "bg-zinc-100 shadow-[6px_6px_0px_#FF0000]"
-              : "hover:shadow-[6px_6px_0px_#000000]",
+              ? "bg-zinc-100 dark:bg-neutral-900 shadow-[6px_6px_0px_#FF0000]"
+              : "hover:shadow-[6px_6px_0px_#000000] dark:hover:shadow-[6px_6px_0px_#FFFFFF]",
             disabled && "opacity-50 pointer-events-none"
           )}
         >
-          <div className="flex h-14 w-14 items-center justify-center border-2 border-black bg-black text-white mb-4 group-hover:scale-105 transition-transform shadow-[3px_3px_0px_#FF0000]">
-            <FolderUp className="h-7 w-7 text-white" />
+          <div className="flex h-14 w-14 items-center justify-center border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black mb-4 group-hover:scale-105 transition-transform shadow-[3px_3px_0px_#FF0000]">
+            <FolderUp className="h-7 w-7 text-white dark:text-black" />
           </div>
 
           <div className="space-y-2 max-w-md">
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-black">
+            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-black dark:text-white">
               DRAG &amp; DROP FILING <span className="stroke-text-thick">HERE</span>
             </h3>
-            <p className="text-xs font-mono text-zinc-600 uppercase">
+            <p className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase">
               OR CLICK TO BROWSE LOCAL FILESYSTEM
             </p>
           </div>
@@ -112,33 +112,33 @@ export function UploadDropzone({
             {["PDF (ANNUAL REPORTS & 10-K)", "EXCEL (.XLSX)", "CSV DATASETS"].map((tag) => (
               <span
                 key={tag}
-                className="border border-black bg-white px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-black shadow-[1px_1px_0px_#000000]"
+                className="border border-black dark:border-white bg-white dark:bg-neutral-900 px-2 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-black dark:text-white shadow-[1px_1px_0px_#000000] dark:shadow-[1px_1px_0px_#FFFFFF]"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="mt-4 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+          <div className="mt-4 text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">
             [ MAX INGESTION CAPACITY: 50 MB / DOCUMENT ]
           </div>
         </div>
       ) : (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-2 border-black bg-white p-5 shadow-[4px_4px_0px_#000000] gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-2 border-black dark:border-white bg-white dark:bg-black p-5 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] gap-4">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center border border-black bg-black text-white shrink-0">
+            <div className="flex h-12 w-12 items-center justify-center border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black shrink-0">
               <FileText className="h-6 w-6 text-[#FF0000]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-black uppercase tracking-tight text-black truncate max-w-[260px] sm:max-w-md">
+                <span className="text-sm font-black uppercase tracking-tight text-black dark:text-white truncate max-w-[260px] sm:max-w-md">
                   {selectedFile.name}
                 </span>
-                <span className="border border-black bg-black text-white px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase">
+                <span className="border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase">
                   READY
                 </span>
               </div>
-              <div className="flex items-center gap-3 text-xs font-mono text-zinc-600 mt-1">
+              <div className="flex items-center gap-3 text-xs font-mono text-neutral-600 dark:text-neutral-400 mt-1">
                 <span>SIZE: {formatBytes(selectedFile.size)}</span>
                 <span>•</span>
                 <span>TYPE: {selectedFile.name.split(".").pop()?.toUpperCase()}</span>
@@ -152,7 +152,7 @@ export function UploadDropzone({
             size="sm"
             onClick={() => onFileSelect(null)}
             disabled={disabled}
-            className="border border-black bg-white hover:bg-[#FF0000] hover:text-white rounded-none font-black uppercase tracking-wider text-xs gap-1.5 shadow-[2px_2px_0px_#000000]"
+            className="border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-[#FF0000] hover:text-white dark:hover:bg-[#FF0000] dark:hover:text-white rounded-none font-black uppercase tracking-wider text-xs gap-1.5 shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF] cursor-pointer"
           >
             <X className="h-4 w-4" />
             <span>REMOVE</span>
@@ -161,7 +161,7 @@ export function UploadDropzone({
       )}
 
       {errorMessage && (
-        <div className="flex items-center gap-2 border border-black bg-[#FF0000] text-white p-3 text-xs font-mono uppercase tracking-wider shadow-[3px_3px_0px_#000000]">
+        <div className="flex items-center gap-2 border-2 border-black dark:border-white bg-[#FF0000] text-white p-3 text-xs font-mono uppercase tracking-wider shadow-[3px_3px_0px_#000000] dark:shadow-[3px_3px_0px_#FFFFFF]">
           <AlertCircle className="h-4 w-4 shrink-0 text-white" />
           <span>{errorMessage}</span>
         </div>

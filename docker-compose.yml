@@ -32,8 +32,8 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-financial_intelligence}
-      FALKORDB_HOST: ${FALKORDB_HOST:-falkordb}
-      FALKORDB_PORT: ${FALKORDB_PORT:-6379}
+      FALKORDB_HOST: falkordb
+      FALKORDB_PORT: 6379
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}

@@ -55,20 +55,20 @@ const severityConfig = {
   HIGH: {
     icon: AlertTriangle,
     color: "text-[#FF0000]",
-    border: "border-black bg-white hover:shadow-[3px_3px_0px_#FF0000]",
-    badge: "bg-[#FF0000] text-white border-black",
+    border: "border-black dark:border-white bg-white dark:bg-black hover:shadow-[3px_3px_0px_#FF0000]",
+    badge: "bg-[#FF0000] text-white border-black dark:border-white",
   },
   MEDIUM: {
     icon: AlertTriangle,
-    color: "text-black",
-    border: "border-black bg-white hover:shadow-[3px_3px_0px_#000000]",
-    badge: "bg-black text-white border-black",
+    color: "text-black dark:text-white",
+    border: "border-black dark:border-neutral-700 bg-white dark:bg-black hover:shadow-[3px_3px_0px_#000000] dark:hover:shadow-[3px_3px_0px_#FFFFFF]",
+    badge: "bg-black dark:bg-white text-white dark:text-black border-black dark:border-white",
   },
   INFO: {
     icon: Info,
-    color: "text-black",
-    border: "border-black bg-white hover:shadow-[3px_3px_0px_#000000]",
-    badge: "bg-white text-black border-black",
+    color: "text-black dark:text-white",
+    border: "border-black dark:border-neutral-700 bg-white dark:bg-black hover:shadow-[3px_3px_0px_#000000] dark:hover:shadow-[3px_3px_0px_#FFFFFF]",
+    badge: "bg-white dark:bg-neutral-900 text-black dark:text-white border-black dark:border-neutral-700",
   },
 };
 
@@ -84,65 +84,65 @@ export function RiskFlagsCard({
   return (
     <div className="flex flex-col gap-4">
       {/* Score Summary */}
-      <div className="rounded-none border border-black bg-white p-5 shadow-[4px_4px_0px_#000000]">
-        <div className="flex items-center justify-between mb-3 border-b border-black pb-2">
-          <h4 className="text-xs font-black uppercase tracking-widest text-black flex items-center gap-2">
+      <div className="rounded-none border-2 border-black dark:border-white bg-white dark:bg-black p-5 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF]">
+        <div className="flex items-center justify-between mb-3 border-b-2 border-black dark:border-white pb-2">
+          <h4 className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
             <span className="text-[#FF0000]">[ 01 ]</span> AUDIT PROVENANCE
           </h4>
-          <span className="text-[10px] font-mono text-zinc-600 uppercase">SYSTEM TRACE</span>
+          <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">SYSTEM TRACE</span>
         </div>
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-4 w-full bg-zinc-200 animate-pulse" />
+              <div key={i} className="h-4 w-full bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
             ))}
           </div>
         ) : (
           <ul className="space-y-2.5 text-xs font-mono">
             {documentName && (
               <li className="flex justify-between items-center gap-4">
-                <span className="text-zinc-600 uppercase">FILING:</span>
-                <code className="text-black bg-zinc-100 px-2 py-0.5 border border-black truncate max-w-[220px]">
+                <span className="text-neutral-600 dark:text-neutral-400 uppercase">FILING:</span>
+                <code className="text-black dark:text-white bg-zinc-100 dark:bg-neutral-900 px-2 py-0.5 border border-black dark:border-neutral-700 truncate max-w-[220px]">
                   {documentName}
                 </code>
               </li>
             )}
             <li className="flex justify-between items-center">
-              <span className="text-zinc-600 uppercase">HEALTH SCORE:</span>
-              <span className="font-black text-black text-sm">
+              <span className="text-neutral-600 dark:text-neutral-400 uppercase">HEALTH SCORE:</span>
+              <span className="font-black text-black dark:text-white text-sm">
                 {overallScore !== null ? `${overallScore.toFixed(1)} / 100` : "N/A"}
               </span>
             </li>
             <li className="flex justify-between items-center">
-              <span className="text-zinc-600 uppercase">DATABASE:</span>
-              <span className="text-black font-bold">PostgreSQL 16 + pgvector</span>
+              <span className="text-neutral-600 dark:text-neutral-400 uppercase">DATABASE:</span>
+              <span className="text-black dark:text-white font-bold">PostgreSQL 16 + pgvector</span>
             </li>
             <li className="flex justify-between items-center">
-              <span className="text-zinc-600 uppercase">INFERENCE ENGINE:</span>
-              <span className="text-black font-bold">Google Gemini 1.5</span>
+              <span className="text-neutral-600 dark:text-neutral-400 uppercase">INFERENCE ENGINE:</span>
+              <span className="text-black dark:text-white font-bold">Google Gemini 1.5</span>
             </li>
           </ul>
         )}
       </div>
 
       {/* Risk Flags */}
-      <div className="rounded-none border border-black bg-white p-5 shadow-[4px_4px_0px_#000000] flex-1">
-        <div className="flex items-center justify-between mb-3 border-b border-black pb-2">
-          <h4 className="text-xs font-black uppercase tracking-widest text-black flex items-center gap-2">
+      <div className="rounded-none border-2 border-black dark:border-white bg-white dark:bg-black p-5 shadow-[4px_4px_0px_#000000] dark:shadow-[4px_4px_0px_#FFFFFF] flex-1">
+        <div className="flex items-center justify-between mb-3 border-b-2 border-black dark:border-white pb-2">
+          <h4 className="text-xs font-black uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
             <span className="text-[#FF0000]">[ 02 ]</span> RISK INDICATORS
           </h4>
-          <span className="text-[10px] font-mono text-zinc-600 uppercase">EXCEPTIONS</span>
+          <span className="text-[10px] font-mono text-neutral-600 dark:text-neutral-400 uppercase">EXCEPTIONS</span>
         </div>
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2].map((i) => (
-              <div key={i} className="h-12 bg-zinc-200 animate-pulse" />
+              <div key={i} className="h-12 bg-zinc-200 dark:bg-neutral-800 animate-pulse" />
             ))}
           </div>
         ) : noRisks ? (
-          <div className="flex items-center gap-3 border border-black bg-white p-4">
-            <ShieldCheck className="h-5 w-5 text-black shrink-0" />
-            <p className="text-xs font-mono uppercase tracking-wider text-black">
+          <div className="flex items-center gap-3 border border-black dark:border-neutral-700 bg-zinc-50 dark:bg-neutral-900 p-4">
+            <ShieldCheck className="h-5 w-5 text-emerald-500 shrink-0" />
+            <p className="text-xs font-mono uppercase tracking-wider text-black dark:text-white">
               No material solvency or financial distress flags detected in corpus.
             </p>
           </div>
@@ -170,11 +170,11 @@ export function RiskFlagsCard({
                       >
                         {flag.severity}
                       </span>
-                      <span className="text-xs font-black uppercase text-black">
+                      <span className="text-xs font-black uppercase text-black dark:text-white">
                         {flag.category}
                       </span>
                     </div>
-                    <p className="text-xs font-mono text-zinc-700 leading-relaxed">
+                    <p className="text-xs font-mono text-neutral-700 dark:text-neutral-300 leading-relaxed">
                       {flag.description}
                     </p>
                   </div>
