@@ -52,8 +52,12 @@ export function DocumentTable({
       (doc.company_name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
       doc.filename.toLowerCase().includes(searchQuery.toLowerCase());
 
+    const isDocCompleted = doc.status === "COMPLETED" || doc.status === "PROCESSED";
     const matchesStatus =
-      statusFilter === "ALL" || doc.status === statusFilter;
+      statusFilter === "ALL" ||
+      (statusFilter === "PROCESSED" || statusFilter === "COMPLETED"
+        ? isDocCompleted
+        : doc.status === statusFilter);
 
     return matchesSearch && matchesStatus;
   });
@@ -89,7 +93,7 @@ export function DocumentTable({
 
         {/* Status Filter Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-          {["ALL", "COMPLETED", "PROCESSING", "FAILED"].map((status) => (
+          {["ALL", "PROCESSED", "PROCESSING", "FAILED"].map((status) => (
             <button
               key={status}
               onClick={() => setStatusFilter(status)}
@@ -191,10 +195,10 @@ export function DocumentTable({
 
                     {/* Status Badge */}
                     <TableCell>
-                      {doc.status === "COMPLETED" ? (
+                      {doc.status === "COMPLETED" || doc.status === "PROCESSED" ? (
                         <span className="inline-flex items-center gap-1 border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 text-[9px] font-mono font-bold uppercase">
                           <Check className="h-3 w-3 text-white dark:text-black" />
-                          COMPLETED
+                          PROCESSED
                         </span>
                       ) : doc.status === "PROCESSING" ? (
                         <span className="inline-flex items-center gap-1 border border-black dark:border-neutral-700 bg-zinc-200 dark:bg-neutral-800 text-black dark:text-white px-2 py-0.5 text-[9px] font-mono font-bold uppercase">

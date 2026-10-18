@@ -457,6 +457,14 @@ def process_document_pipeline(
         doc.error_message = None
         db.commit()
 
+        # 7. Automatically synchronize to FalkorDB Knowledge Graph
+        try:
+            from app.services.falkor_graph_builder import graph_builder
+            graph_builder.sync_document_to_graph(doc.id, db)
+            logger.info("Synchronized document %s to FalkorDB graph.", doc.id)
+        except Exception as graph_err:
+            logger.warning("FalkorDB graph auto-sync note: %s", graph_err)
+
         return {
             "status": "PROCESSED",
             "document_id": str(doc.id),

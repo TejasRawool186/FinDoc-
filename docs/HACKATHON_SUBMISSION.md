@@ -4,8 +4,8 @@
 > **Team**: RAGify (Team Code: `R4N93Q`)  
 > **Team Members**:
 > - **Tejas Rawool** ([@tejasrawool186](https://github.com/TejasRawool186)) — *Team Leader, Full-Stack Next.js 15 Architect & DevOps*
-> - **Samar Shetye** ([@samarshetye](https://github.com/samarshetye)) — *AI, Knowledge Graph Lead & Quantitative Financial Engine*  
-> **Repository**: [https://github.com/TejasRawool186/FinDoc-](https://github.com/TejasRawool186/FinDoc-)
+> **Repository**: [https://github.com/TejasRawool186/FinDoc-](https://github.com/TejasRawool186/FinDoc-)  
+> **Demo Video (YouTube)**: [https://www.youtube.com/watch?v=J4goPNWRXeA](https://www.youtube.com/watch?v=J4goPNWRXeA)  
 
 ---
 

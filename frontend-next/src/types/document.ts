@@ -3,6 +3,7 @@ export type DocumentStatus =
   | "PROCESSING"
   | "PARSED"
   | "INDEXED"
+  | "PROCESSED"
   | "COMPLETED"
   | "FAILED";
 

@@ -23,7 +23,7 @@ export function DocumentWorkspaceSync() {
   useEffect(() => {
     if (!activeDocumentId && documents.length > 0) {
       const firstCompleted =
-        documents.find((d) => d.status === "COMPLETED") || documents[0];
+        documents.find((d) => d.status === "COMPLETED" || d.status === "PROCESSED") || documents[0];
       setActiveDocument(firstCompleted);
     } else if (activeDocumentId && documents.length > 0) {
       const current = documents.find((d) => d.id === activeDocumentId);

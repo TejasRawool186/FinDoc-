@@ -3,6 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/FalkorDB-Context%20Layer%20for%20AI%20Agents-red?style=for-the-badge&logo=redis&logoColor=white" alt="FalkorDB Context Layer" />
   <img src="https://img.shields.io/badge/Graph%20Hacks-WeMakeDevs%20Hackathon-purple?style=for-the-badge" alt="Graph Hacks WeMakeDevs" />
+  <a href="https://www.youtube.com/watch?v=J4goPNWRXeA"><img src="https://img.shields.io/badge/YouTube%20Demo-Watch%20Live%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Demo" /></a>
   <img src="https://img.shields.io/badge/Next.js-15%20App%20Router-black?style=for-the-badge&logo=next.js" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/FastAPI-0.110-009688?style=for-the-badge&logo=fastapi" alt="FastAPI" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License" />
@@ -112,7 +113,12 @@ All 4 services will start and report healthy:
 
 > **Submission Tip 02 Verified**: Live, interactive web application with end-to-end functionality, live Cypher execution, and pre-seeded test corpora.
 
-[![FinDoc AI Working Demo Video](https://img.shields.io/badge/Demo%20Video-Watch%20Live%20Walkthrough-red?style=for-the-badge&logo=youtube)](https://youtu.be/sample-video-link-here)
+[![FinDoc AI Working Demo Video](https://img.shields.io/badge/Demo%20Video-Watch%20Live%20Walkthrough-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=J4goPNWRXeA)
+
+🎥 **Watch the Full Live Platform Walkthrough on YouTube**:  
+👉 **[https://www.youtube.com/watch?v=J4goPNWRXeA](https://www.youtube.com/watch?v=J4goPNWRXeA)**
+
+---
 
 ### Interactive Platform Pages (Tested & Working)
 

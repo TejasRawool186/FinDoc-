@@ -235,7 +235,29 @@ class FalkorFinancialAgent:
                 "path_summary": [f"LineItem(FY{r.get('current_year')}) -> YEAR_OVER_YEAR -> LineItem(FY{r.get('prior_year')})" for r in data if r.get('prior_year')],
             }
 
-        # Generic structured fallback
+        # Synthesize via Google Gemini LLM using connected graph data
+        if self.llm:
+            try:
+                prompt = (
+                    f"You are the FinDoc AI Graph Analyst powered by FalkorDB. "
+                    f"Answer the user query based on the following FalkorDB knowledge graph records for {company}.\n\n"
+                    f"User Query: {query}\n\n"
+                    f"FalkorDB Connected Records (tool: {tool}):\n{json.dumps(data[:15], default=str)}\n\n"
+                    f"Provide an insightful, professional financial answer. Include specific numbers, line items, and ratios found in the connected data."
+                )
+                res = self.llm.generate([
+                    {"role": "system", "content": "You are an expert corporate financial analyst grounded in a FalkorDB knowledge graph."},
+                    {"role": "user", "content": prompt},
+                ])
+                if res and res.raw_answer:
+                    return {
+                        "summary": res.raw_answer,
+                        "path_summary": [f"Record {idx + 1}: {list(d.keys())}" for idx, d in enumerate(data[:3])],
+                    }
+            except Exception as llm_err:
+                logger.warning("FalkorDB Gemini synthesis fallback: %s", llm_err)
+
+        # Generic structured fallback if LLM is unreachable
         summary = (
             f"### 🕸️ FalkorDB Graph Analysis for {company}\n\n"
             f"Successfully executed multi-hop query `{tool}` returning {len(data)} connected records. "

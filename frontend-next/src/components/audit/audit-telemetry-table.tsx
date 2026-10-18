@@ -39,7 +39,7 @@ export function AuditTelemetryTable({ documents }: AuditTelemetryTableProps) {
 
     documents.forEach((doc, idx) => {
       const company = doc.company_name || doc.filename;
-      const isCompleted = doc.status === "COMPLETED";
+      const isCompleted = doc.status === "COMPLETED" || doc.status === "PROCESSED";
 
       // 1. PDF Validation & Text Extraction
       logs.push({

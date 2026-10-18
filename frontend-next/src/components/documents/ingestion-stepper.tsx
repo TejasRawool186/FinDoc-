@@ -46,7 +46,7 @@ export function IngestionStepper({
     queryFn: () => documentService.getDocument(documentId),
     refetchInterval: (query) => {
       const status = query.state.data?.status;
-      if (status === "COMPLETED" || status === "FAILED") return false;
+      if (status === "COMPLETED" || status === "PROCESSED" || status === "FAILED") return false;
       return 2500;
     },
   });
@@ -60,7 +60,7 @@ export function IngestionStepper({
   }, []);
 
   const status = document?.status || "PROCESSING";
-  const isCompleted = status === "COMPLETED";
+  const isCompleted = status === "COMPLETED" || status === "PROCESSED";
   const isFailed = status === "FAILED";
 
   useEffect(() => {
@@ -91,13 +91,13 @@ export function IngestionStepper({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="inline-block w-2.5 h-2.5 bg-[#FF0000]" />
+            <span className={cn("inline-block w-2.5 h-2.5", isCompleted ? "bg-[#00AA00]" : "bg-[#FF0000]")} />
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-black">
-              [ PIPELINE: INGESTION IN PROGRESS ]
+              [ PIPELINE: {isCompleted ? "INGESTION COMPLETED" : "INGESTION IN PROGRESS"} ]
             </span>
           </div>
           <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-black">
-            PROCESSING: <span className="stroke-text-thick">{filename}</span>
+            {isCompleted ? "INGESTED: " : "PROCESSING: "}<span className="stroke-text-thick">{filename}</span>
           </h3>
           <p className="text-xs font-mono text-zinc-600 mt-1">
             ELAPSED TIME: {elapsedSeconds}s • TARGET: POSTGRESQL PGVECTOR

@@ -47,7 +47,7 @@ export default function ChatPage() {
     scrollToBottom();
   }, [messages.length, isGenerating]);
 
-  const [isGraphMode, setIsGraphMode] = useState(true);
+  const [isGraphMode, setIsGraphMode] = useState(false);
 
   // Handle Query Submission
   const handleSendMessage = async (questionText: string) => {
@@ -226,17 +226,30 @@ export default function ChatPage() {
               <span className="truncate">{activeDocument.filename}</span>
             </span>
 
-            <button
-              type="button"
-              onClick={() => setIsGraphMode(!isGraphMode)}
-              className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 border-2 border-black dark:border-white transition-colors cursor-pointer shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF] ${
-                isGraphMode
-                  ? "bg-[#FF0000] text-white"
-                  : "bg-white dark:bg-black text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-neutral-900"
-              }`}
-            >
-              <span>{isGraphMode ? "🕸️ FALKORDB GRAPH" : "📄 VECTOR RAG"}</span>
-            </button>
+            <div className="inline-flex border-2 border-black dark:border-white shadow-[2px_2px_0px_#000000] dark:shadow-[2px_2px_0px_#FFFFFF]">
+              <button
+                type="button"
+                onClick={() => setIsGraphMode(false)}
+                className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 transition-colors cursor-pointer ${
+                  !isGraphMode
+                    ? "bg-black dark:bg-white text-white dark:text-black"
+                    : "bg-white dark:bg-black text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-neutral-900"
+                }`}
+              >
+                <span>✨ GEMINI RAG</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsGraphMode(true)}
+                className={`flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 border-l-2 border-black dark:border-white transition-colors cursor-pointer ${
+                  isGraphMode
+                    ? "bg-[#FF0000] text-white"
+                    : "bg-white dark:bg-black text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-neutral-900"
+                }`}
+              >
+                <span>🕸️ FALKORDB</span>
+              </button>
+            </div>
 
             <button
               type="button"

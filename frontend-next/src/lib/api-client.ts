@@ -16,6 +16,7 @@ apiClient.interceptors.response.use(
   (error) => {
     const errorMsg =
       error.response?.data?.detail ||
+      error.response?.data?.error?.message ||
       error.response?.data?.message ||
       error.message ||
       "An unexpected network error occurred";
